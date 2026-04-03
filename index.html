@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EDA Portfolio — Machine Learning</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #EDE0CE;
+    --surface: #E5D5BE;
+    --card: #F2EAD9;
+    --border: rgba(90,55,45,0.12);
+    --accent: #6B2D2D;
+    --accent2: #8C9BAB;
+    --accent3: #5C3A2E;
+    --accent4: #A67B6B;
+    --text: #3B2220;
+    --muted: rgba(59,34,32,0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    padding: 0 6vw;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(237,224,206,0.96);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 50;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+  .logo span {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 12px;
+    margin-left: 10px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 90px 6vw 80px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -60px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(107,45,45,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6.5vw, 88px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 500px;
+    margin-bottom: 52px;
+    line-height: 1.8;
+  }
+
+  /* STUDENT CARD */
+  .student-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 36px;
+    flex-wrap: wrap;
+    max-width: 640px;
+  }
+  .avatar {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid rgba(107,45,45,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .student-info { display: flex; flex-direction: column; gap: 8px; }
+  .student-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1;
+  }
+  .student-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .meta-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .meta-tag.hi { background: rgba(107,45,45,0.08); color: var(--accent); border-color: rgba(107,45,45,0.2); }
+
+  /* LAYOUT */
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 6vw; }
+  section { padding: 72px 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 46px);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .section-desc { font-size: 14px; color: var(--muted); max-width: 560px; margin-bottom: 44px; }
+
+  /* TASK CARDS */
+  .tasks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  @media(max-width: 900px) { .tasks-grid { grid-template-columns: 1fr; } }
+
+  .task-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    position: relative;
+  }
+  .task-card:not(.soon):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 48px rgba(90,45,35,0.11);
+    border-color: rgba(107,45,45,0.28);
+  }
+
+  .task-thumb {
+    height: 148px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .task-card:nth-child(1) .task-thumb { background: linear-gradient(140deg, #6B2D2D 0%, #A67B6B 100%); }
+  .task-card:nth-child(2) .task-thumb { background: linear-gradient(140deg, #8C9BAB 0%, #5a7080 100%); }
+  .task-card:nth-child(3) .task-thumb { background: linear-gradient(140deg, #5C3A2E 0%, #8a6050 100%); }
+
+  .task-icon { font-size: 54px; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.18)); }
+  .task-num {
+    position: absolute; top: 14px; left: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.55); text-transform: uppercase;
+  }
+  .task-badge-th {
+    position: absolute; top: 12px; right: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    padding: 3px 10px; border-radius: 20px;
+    background: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.85);
+    text-transform: uppercase;
+  }
+
+  .task-body { padding: 26px 28px 30px; flex: 1; display: flex; flex-direction: column; }
+
+  .task-type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .task-card:nth-child(1) .task-type { color: var(--accent); }
+  .task-card:nth-child(2) .task-type { color: #5a7080; }
+  .task-card:nth-child(3) .task-type { color: var(--accent3); }
+
+  .task-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px; font-weight: 600;
+    margin-bottom: 10px; line-height: 1.25;
+  }
+  .task-desc {
+    font-size: 12.5px; color: var(--muted);
+    line-height: 1.7; flex: 1; margin-bottom: 20px;
+  }
+  .task-stats { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 22px; }
+  .tstat { display: flex; flex-direction: column; gap: 2px; }
+  .tstat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600;
+  }
+  .task-card:nth-child(1) .tstat-val { color: var(--accent); }
+  .task-card:nth-child(2) .tstat-val { color: #5a7080; }
+  .task-card:nth-child(3) .tstat-val { color: var(--accent3); }
+  .tstat-lbl {
+    font-size: 9px; color: var(--muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .task-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 10px 18px; border-radius: 8px;
+    transition: all .18s; align-self: flex-start;
+  }
+  .task-card:nth-child(1) .task-cta {
+    color: var(--accent);
+    border: 1px solid rgba(107,45,45,0.25);
+    background: rgba(107,45,45,0.05);
+  }
+  .task-card:nth-child(1) .task-cta:hover { background: rgba(107,45,45,0.12); border-color: rgba(107,45,45,0.4); }
+  .task-card:nth-child(2) .task-cta {
+    color: #5a7080;
+    border: 1px solid rgba(90,112,128,0.25);
+    background: rgba(90,112,128,0.05);
+  }
+  .task-card:nth-child(3) .task-cta {
+    color: var(--accent3);
+    border: 1px solid rgba(92,58,46,0.25);
+    background: rgba(92,58,46,0.05);
+  }
+
+  .task-cta svg { transition: transform .18s; }
+  .task-card:hover .task-cta svg { transform: translateX(3px); }
+
+  /* COMING SOON */
+  .task-card.soon {
+    opacity: 0.72;
+    cursor: default;
+    pointer-events: none;
+  }
+  .soon-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(237,224,206,0.35);
+    backdrop-filter: blur(2px);
+    z-index: 5;
+  }
+  .soon-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.25em;
+    color: var(--muted); text-transform: uppercase;
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+    font-size: 11px; color: var(--muted);
+  }
+  footer code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--card);
+    padding: 2px 8px; border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">EDA Portfolio <span>// ML Course</span></div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.1em;">2025 – 2026</div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Exploratory Data Analysis</div>
+    <h1>Machine Learning<br/><em>Final Project</em></h1>
+    <p class="hero-sub">
+      Báo cáo phân tích dữ liệu khám phá cho 3 bài toán học máy:
+      Phân loại văn bản, Phân loại ảnh, và Dự đoán dữ liệu bảng.
+    </p>
+
+    <div class="student-card">
+      <div class="avatar">N</div>
+      <div class="student-info">
+        <div class="student-name">Nguyễn Văn A</div>
+        <div class="student-meta">
+          <span class="meta-tag hi">MSSV: 12345678</span>
+          <span class="meta-tag">Lớp: CNTT01</span>
+          <span class="meta-tag">Môn: Machine Learning</span>
+          <span class="meta-tag">GV: Nguyễn Thị B</span>
+          <span class="meta-tag">UIT — 2025–2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TASKS -->
+<section>
+  <div class="wrap">
+    <div class="section-label">Nội dung báo cáo</div>
+    <h2 class="section-title">3 Tasks — 3 Datasets</h2>
+    <p class="section-desc">
+      Mỗi task tương ứng một loại dữ liệu và phương pháp phân tích riêng.
+      Nhấn vào card để xem báo cáo EDA chi tiết.
+    </p>
+
+    <div class="tasks-grid">
+
+      <!-- TASK 1: TEXT -->
+      <a href="text.html" class="task-card">
+        <div class="task-thumb">
+          <span class="task-num">Task 01</span>
+          <span class="task-badge-th">NLP</span>
+          <span class="task-icon">📝</span>
+        </div>
+        <div class="task-body">
+          <div class="task-type">Text Classification</div>
+          <div class="task-title">Women's Clothing Reviews</div>
+          <div class="task-desc">
+            Phân tích tập đánh giá sản phẩm thời trang phụ nữ từ nền tảng e-commerce.
+            Khám phá phân phối rating, từ vựng và đặc trưng văn bản.
+          </div>
+          <div class="task-stats">
+            <div class="tstat"><span class="tstat-val">23,486</span><span class="tstat-lbl">Reviews</span></div>
+            <div class="tstat"><span class="tstat-val">11</span><span class="tstat-lbl">Features</span></div>
+            <div class="tstat"><span class="tstat-val">4.20★</span><span class="tstat-lbl">Avg Rating</span></div>
+          </div>
+          <span class="task-cta">
+            Xem báo cáo
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- TASK 2: IMAGE -->
+      <div class="task-card soon">
+        <div class="soon-overlay"><span class="soon-label">Coming Soon</span></div>
+        <div class="task-thumb">
+          <span class="task-num">Task 02</span>
+          <span class="task-badge-th">Vision</span>
+          <span class="task-icon">🖼️</span>
+        </div>
+        <div class="task-body">
+          <div class="task-type">Image Classification</div>
+          <div class="task-title">Image Dataset</div>
+          <div class="task-desc">
+            Phân tích tập dữ liệu hình ảnh phục vụ bài toán phân loại.
+            Khám phá phân phối nhãn, kích thước ảnh và đặc trưng màu sắc.
+          </div>
+          <div class="task-stats">
+            <div class="tstat"><span class="tstat-val">—</span><span class="tstat-lbl">Images</span></div>
+            <div class="tstat"><span class="tstat-val">—</span><span class="tstat-lbl">Classes</span></div>
+          </div>
+          <span class="task-cta">
+            Xem báo cáo
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <!-- TASK 3: TABULAR -->
+      <div class="task-card soon">
+        <div class="soon-overlay"><span class="soon-label">Coming Soon</span></div>
+        <div class="task-thumb">
+          <span class="task-num">Task 03</span>
+          <span class="task-badge-th">Tabular</span>
+          <span class="task-icon">📊</span>
+        </div>
+        <div class="task-body">
+          <div class="task-type">Tabular Prediction</div>
+          <div class="task-title">Tabular Dataset</div>
+          <div class="task-desc">
+            Phân tích tập dữ liệu bảng cho bài toán phân loại hoặc hồi quy.
+            Khám phá phân phối đặc trưng, tương quan và giá trị thiếu.
+          </div>
+          <div class="task-stats">
+            <div class="tstat"><span class="tstat-val">—</span><span class="tstat-lbl">Rows</span></div>
+            <div class="tstat"><span class="tstat-val">—</span><span class="tstat-lbl">Features</span></div>
+          </div>
+          <span class="task-cta">
+            Xem báo cáo
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>EDA Portfolio — Machine Learning · 2025–2026</span>
+  <span>Hosted on <code>GitHub Pages</code></span>
+</footer>
+
+</body>
+</html>
