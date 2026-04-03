@@ -105,17 +105,16 @@
   /* NAV BAR */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(230,228,218,0.96);
+    background: rgba(201, 193, 177, 0.97);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 5vw;
-    display: flex; align-items: center; gap: 8px;
-    height: 52px;
-    overflow-x: auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    height: 54px;
   }
   nav a {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10px;
     color: var(--muted);
     text-decoration: none;
     padding: 6px 14px;
@@ -277,12 +276,29 @@
 <body>
 
 <!-- HERO -->
+<!-- STICKY NAV -->
+<nav>
+  <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .15s;padding:5px 0;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Home
+    </a>
+    <span style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;color:var(--text);">Task 01 — Text EDA</span>
+  </div>
+  <div style="display:flex;gap:4px;overflow-x:auto;">
+    <a href="#overview">Overview</a>
+    <a href="#missing">Data Quality</a>
+    <a href="#stats">Statistics</a>
+    <a href="#ratings">Ratings</a>
+    <a href="#age">Age</a>
+    <a href="#departments">Departments</a>
+    <a href="#text">Text Analysis</a>
+    <a href="#findings">Key Findings</a>
+  </div>
+</nav>
+
 <div class="hero">
-  <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-bottom:24px;transition:color .15s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--muted)'">
-  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  Back to Home
-</a>
-<div class="hero-eyebrow">Task 01 — Text Classification</div>
+  <div class="hero-eyebrow">Task 01 — Text Classification</div>
   <h1>Women's Clothing<br/><em>E-Commerce Reviews</em></h1>
   <p class="hero-desc">
     A deep dive into 23,486 real customer reviews across clothing categories —
@@ -296,17 +312,6 @@
   </div>
 </div>
 
-<!-- STICKY NAV -->
-<nav>
-  <a href="#overview">Overview</a>
-  <a href="#missing">Data Quality</a>
-  <a href="#stats">Statistics</a>
-  <a href="#ratings">Ratings</a>
-  <a href="#age">Age</a>
-  <a href="#departments">Departments</a>
-  <a href="#text">Text Analysis</a>
-  <a href="#findings">Key Findings</a>
-</nav>
 
 <!-- OVERVIEW -->
 <section id="overview">

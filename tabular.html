@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Task 2 — Image EDA · HAM10000</title>
+<title>Task 3 — Tabular EDA · Bodybuilding Nutrition Products</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
@@ -12,11 +12,11 @@
     --surface: #CDD0CE;
     --card: #F0EFEB;
     --border: rgba(60,80,90,0.2);
-    --accent: #3D5A66;
-    --accent-r: #4A3428;
+    --accent: #4A3428;
+    --accent2: #3D5A66;
     --text: #1A1A1A;
     --muted: rgba(26,26,26,0.55);
-    --tag-bg: rgba(61,90,102,0.09);
+    --tag-bg: rgba(74,52,40,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,14 +32,14 @@
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(230,228,218,0.96);
+    background: rgba(201,193,177,0.97);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 5vw;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
     height: 54px;
   }
-  .nav-left { display: flex; align-items: center; gap: 20px; }
+  .nav-left { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
   .back-link {
     display: inline-flex; align-items: center; gap: 6px;
     font-family: 'JetBrains Mono', monospace;
@@ -50,18 +50,16 @@
   .back-link:hover { color: var(--accent); }
   .nav-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; font-weight: 600; color: var(--text);
+    font-size: 15px; font-weight: 600; color: var(--text);
   }
-  .nav-right {
-    display: flex; gap: 6px; overflow-x: auto;
-  }
-  .nav-right a {
+  .nav-links { display: flex; gap: 4px; overflow-x: auto; }
+  .nav-links a {
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
     color: var(--muted); text-decoration: none;
     padding: 5px 12px; border-radius: 4px; white-space: nowrap;
     transition: all .15s;
   }
-  .nav-right a:hover { background: var(--surface); color: var(--text); }
+  .nav-links a:hover { background: var(--surface); color: var(--text); }
 
   /* HERO */
   .hero {
@@ -74,14 +72,14 @@
     content: '';
     position: absolute; top: -100px; left: -60px;
     width: 550px; height: 550px;
-    background: radial-gradient(circle, rgba(107,123,132,0.09) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(74,52,40,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero::after {
     content: '';
     position: absolute; bottom: -80px; right: -40px;
     width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(94,75,59,0.06) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(61,90,102,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
   .eyebrow {
@@ -92,7 +90,6 @@
     display: flex; align-items: center; gap: 10px;
   }
   .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
-
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(36px, 5.5vw, 72px);
@@ -101,7 +98,6 @@
   }
   .hero h1 em { font-style: italic; color: var(--accent); }
   .hero-desc { max-width: 560px; color: var(--muted); font-size: 14px; margin-bottom: 40px; line-height: 1.8; }
-
   .hero-stats { display: flex; gap: 36px; flex-wrap: wrap; }
   .hstat { display: flex; flex-direction: column; gap: 3px; }
   .hstat-val {
@@ -127,18 +123,19 @@
     font-size: clamp(22px, 2.8vw, 36px); font-weight: 600;
     letter-spacing: -0.01em; margin-bottom: 8px;
   }
-  .section-desc { color: var(--muted); font-size: 13px; max-width: 600px; margin-bottom: 36px; }
+  .section-desc { color: var(--muted); font-size: 13px; max-width: 640px; margin-bottom: 36px; }
 
   /* CARDS */
   .card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 12px; padding: 28px; transition: border-color .2s;
   }
-  .card:hover { border-color: rgba(61,90,102,0.4); }
+  .card:hover { border-color: rgba(74,52,40,0.3); }
   .card-title { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 20px; letter-spacing: 0.04em; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media(max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  @media(max-width: 860px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
   /* STAT GRID */
   .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 40px; }
@@ -150,52 +147,73 @@
   .stat-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   }
-  .s1::before { background: var(--accent); }
-  .s2::before { background: var(--accent-r); }
+  .s1::before { background: #4A3428; }
+  .s2::before { background: #3D5A66; }
   .s3::before { background: #7A8A8A; }
-  .s4::before { background: #5E7A8A; }
+  .s4::before { background: #9a7a60; }
   .stat-val {
     font-family: 'Cormorant Garamond', serif;
     font-size: 28px; font-weight: 600; line-height: 1; margin-bottom: 5px;
   }
-  .s1 .stat-val { color: var(--accent); }
-  .s2 .stat-val { color: var(--accent-r); }
+  .s1 .stat-val { color: #4A3428; }
+  .s2 .stat-val { color: #3D5A66; }
   .s3 .stat-val { color: #7A8A8A; }
-  .s4 .stat-val { color: #5E7A8A; }
+  .s4 .stat-val { color: #9a7a60; }
   .stat-lbl { font-size: 11px; color: var(--muted); }
 
-  /* DIAGNOSIS LEGEND */
-  .dx-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 28px; }
-  @media(max-width: 600px) { .dx-grid { grid-template-columns: 1fr; } }
-  .dx-item {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; padding: 12px 16px;
+  /* TABLE */
+  .tbl-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th {
+    text-align: left; font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; color: var(--muted);
+    text-transform: uppercase; padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
   }
-  .dx-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .dx-code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 500; color: var(--text); min-width: 30px;
-  }
-  .dx-name { font-size: 12px; color: var(--muted); flex: 1; }
-  .dx-count {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; color: var(--text); font-weight: 500;
-  }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(60,80,90,0.06); }
+  tr:hover td { background: rgba(60,80,90,0.02); }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10px; font-family: 'JetBrains Mono', monospace; }
+  .badge-warn { background: rgba(74,52,40,0.12); color: #4A3428; }
+  .badge-ok { background: rgba(61,90,102,0.1); color: #3D5A66; }
+  .badge-num { background: rgba(61,90,102,0.08); color: #3D5A66; }
+  .badge-cat { background: rgba(74,52,40,0.08); color: #7A5A48; }
 
-  /* IMBALANCE BAR */
-  .imbalance-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .imb-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; min-width: 40px; color: var(--text); letter-spacing: 0.06em;
+  /* MISSING BAR */
+  .missing-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .missing-label { font-size: 12px; min-width: 190px; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .missing-bar-bg { flex: 1; height: 7px; background: var(--surface); border-radius: 4px; overflow: hidden; }
+  .missing-bar-fill { height: 7px; border-radius: 4px; transition: width .6s ease; }
+  .missing-pct { font-family: 'JetBrains Mono', monospace; font-size: 10px; min-width: 44px; text-align: right; }
+  .missing-rec { font-size: 10px; color: var(--muted); min-width: 200px; }
+
+  /* CORR BADGE */
+  .corr-row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 14px 18px; margin-bottom: 10px;
   }
-  .imb-bar-bg { flex: 1; height: 8px; background: var(--surface); border-radius: 4px; overflow: hidden; }
-  .imb-bar-fill { height: 8px; border-radius: 4px; transition: width .7s ease; }
-  .imb-count {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; color: var(--muted); min-width: 44px; text-align: right;
+  .corr-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 600; min-width: 60px;
   }
-  .imb-pct { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); min-width: 38px; text-align: right; }
+  .corr-val.high { color: #4A3428; }
+  .corr-val.med { color: #3D5A66; }
+  .corr-pair { font-size: 13px; color: var(--text); }
+  .corr-pair span { color: var(--muted); font-size: 11px; font-family: 'JetBrains Mono', monospace; }
+
+  /* OUTLIER TABLE */
+  .outlier-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .outlier-row:last-child { border-bottom: none; }
+  .outlier-feat { font-size: 12px; font-weight: 500; min-width: 160px; }
+  .outlier-bar-bg { flex: 1; height: 6px; background: var(--surface); border-radius: 3px; }
+  .outlier-bar-fill { height: 6px; border-radius: 3px; background: #4A3428; }
+  .outlier-pct { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text); min-width: 48px; text-align: right; }
+  .outlier-sev { font-size: 10px; padding: 2px 9px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; }
+  .sev-high { background: rgba(74,52,40,0.15); color: #4A3428; }
+  .sev-med { background: rgba(61,90,102,0.1); color: #3D5A66; }
 
   /* KEY FINDINGS */
   .findings { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -209,24 +227,17 @@
   .finding-text strong { display: block; font-size: 13px; font-weight: 500; margin-bottom: 3px; }
   .finding-text span { font-size: 12px; color: var(--muted); }
 
-  /* TABLE */
-  .tbl-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th {
-    text-align: left; font-family: 'JetBrains Mono', monospace;
-    font-size: 9px; letter-spacing: 0.12em; color: var(--muted);
-    text-transform: uppercase; padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
+  /* PRICE TIER */
+  .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .tier-item {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px;
   }
-  td { padding: 10px 14px; border-bottom: 1px solid rgba(61,90,102,0.1); }
-  tr:hover td { background: rgba(61,90,102,0.05); }
-  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10px; font-family: 'JetBrains Mono', monospace; }
-  .badge-warn { background: rgba(74,52,40,0.15); color: var(--accent-r); }
-  .badge-ok { background: rgba(61,90,102,0.15); color: var(--accent); }
+  .tier-name { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .tier-count { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; }
+  .tier-pct { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
   canvas { max-height: 300px; }
 
-  /* FOOTER */
   footer {
     padding: 32px 5vw;
     display: flex; justify-content: space-between; align-items: center;
@@ -249,14 +260,17 @@
       <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Home
     </a>
-    <div class="nav-title">Task 02 — Image EDA</div>
+    <div class="nav-title">Task 03 — Tabular EDA</div>
   </div>
-  <div class="nav-right">
+  <div class="nav-links">
     <a href="#overview">Overview</a>
-    <a href="#diagnosis">Diagnosis</a>
-    <a href="#imbalance">Imbalance</a>
-    <a href="#demographics">Demographics</a>
-    <a href="#localization">Localization</a>
+    <a href="#schema">Schema</a>
+    <a href="#missing">Missing Values</a>
+    <a href="#numerical">Numerical</a>
+    <a href="#categorical">Categorical</a>
+    <a href="#outliers">Outliers</a>
+    <a href="#correlation">Correlation</a>
+    <a href="#target">Target</a>
     <a href="#findings">Findings</a>
   </div>
 </nav>
@@ -264,18 +278,18 @@
 <!-- HERO -->
 <div class="hero">
   <div class="wrap">
-    <div class="eyebrow">Task 02 — Image Classification</div>
-    <h1>Skin Cancer MNIST<br/><em>HAM10000</em></h1>
+    <div class="eyebrow">Task 03 — Tabular Prediction</div>
+    <h1>Bodybuilding Nutrition<br/><em>Products Dataset</em></h1>
     <p class="hero-desc">
-      The HAM10000 dataset (Human Against Machine with 10,000 training images) contains
-      10,015 dermatoscopic images labeled by medical experts. It is the standard benchmark
-      for skin lesion classification in medical computer vision research.
+      Dataset chứa thông tin về các sản phẩm dinh dưỡng thể hình từ nền tảng Bodybuilding.com,
+      bao gồm giá cả, đánh giá, thương hiệu và phân loại sản phẩm.
+      Mục tiêu: phân loại sản phẩm thành <strong>Premium</strong> hay <strong>Standard</strong> dựa trên ngưỡng giá median.
     </p>
     <div class="hero-stats">
-      <div class="hstat"><span class="hstat-val">10,015</span><span class="hstat-lbl">Total Images</span></div>
-      <div class="hstat"><span class="hstat-val">7</span><span class="hstat-lbl">Diagnosis Classes</span></div>
-      <div class="hstat"><span class="hstat-val">15</span><span class="hstat-lbl">Localizations</span></div>
-      <div class="hstat"><span class="hstat-val">45</span><span class="hstat-lbl">Median Age</span></div>
+      <div class="hstat"><span class="hstat-val">840</span><span class="hstat-lbl">Total Samples</span></div>
+      <div class="hstat"><span class="hstat-val">14</span><span class="hstat-lbl">Features</span></div>
+      <div class="hstat"><span class="hstat-val">7</span><span class="hstat-lbl">Numerical</span></div>
+      <div class="hstat"><span class="hstat-val">7</span><span class="hstat-lbl">Categorical</span></div>
     </div>
   </div>
 </div>
@@ -284,109 +298,285 @@
 <section id="overview">
   <div class="wrap">
     <div class="section-label">01 — Dataset Overview</div>
-    <h2 class="section-title">Schema & Statistics</h2>
-    <p class="section-desc">Metadata includes diagnosis type, verification method, patient sex, lesion localization, and patient age.</p>
+    <h2 class="section-title">Tổng Quan Dataset</h2>
+    <p class="section-desc">Dataset được chia thành tập train (562 mẫu) và tập test (278 mẫu). Không có giá trị trùng lặp. Tuy nhiên, nhiều cột có tỷ lệ missing cao đáng kể.</p>
 
     <div class="stat-grid">
-      <div class="stat-card s1"><div class="stat-val">10,015</div><div class="stat-lbl">Total Records</div></div>
-      <div class="stat-card s2"><div class="stat-val">7</div><div class="stat-lbl">Diagnosis Classes</div></div>
-      <div class="stat-card s3"><div class="stat-val">0</div><div class="stat-lbl">Duplicate Rows</div></div>
-      <div class="stat-card s4"><div class="stat-val">57</div><div class="stat-lbl">Missing Age Values</div></div>
+      <div class="stat-card s1"><div class="stat-val">840</div><div class="stat-lbl">Total Records</div></div>
+      <div class="stat-card s2"><div class="stat-val">562 / 278</div><div class="stat-lbl">Train / Test Split</div></div>
+      <div class="stat-card s3"><div class="stat-val">14</div><div class="stat-lbl">Total Features</div></div>
+      <div class="stat-card s4"><div class="stat-val">8</div><div class="stat-lbl">Cols with Missing</div></div>
     </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Split Distribution</div>
+        <canvas id="splitChart"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">Feature Types</div>
+        <canvas id="typeChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEMA -->
+<section id="schema">
+  <div class="wrap">
+    <div class="section-label">02 — Schema</div>
+    <h2 class="section-title">Mô Tả Các Cột</h2>
+    <p class="section-desc">14 features bao gồm thông tin sản phẩm, thương hiệu, giá cả, đánh giá và danh mục.</p>
 
     <div class="tbl-wrap">
       <table>
         <thead>
-          <tr><th>#</th><th>Column</th><th>Type</th><th>Non-Null</th><th>Status</th></tr>
+          <tr><th>#</th><th>Feature</th><th>Type</th><th>Non-Null</th><th>Missing %</th><th>Status</th></tr>
         </thead>
         <tbody>
-          <tr><td>0</td><td>lesion_id</td><td><span class="badge badge-ok">object</span></td><td>10,015</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
-          <tr><td>1</td><td>image_id</td><td><span class="badge badge-ok">object</span></td><td>10,015</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
-          <tr><td>2</td><td>dx (diagnosis)</td><td><span class="badge badge-ok">object</span></td><td>10,015</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
-          <tr><td>3</td><td>dx_type</td><td><span class="badge badge-ok">object</span></td><td>10,015</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
-          <tr><td>4</td><td>age</td><td><span class="badge badge-ok">float64</span></td><td>9,958</td><td><span class="badge badge-warn">⚠ 57 missing (0.57%)</span></td></tr>
-          <tr><td>5</td><td>sex</td><td><span class="badge badge-ok">object</span></td><td>10,015</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
-          <tr><td>6</td><td>localization</td><td><span class="badge badge-ok">object</span></td><td>10,015</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>0</td><td>average_flavor_rating</td><td><span class="badge badge-num">Numerical</span></td><td>387</td><td>53.9%</td><td><span class="badge badge-warn">⚠ Drop candidate</span></td></tr>
+          <tr><td>1</td><td>brand_name</td><td><span class="badge badge-cat">Categorical</span></td><td>840</td><td>0%</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>2</td><td>link</td><td><span class="badge badge-cat">Categorical</span></td><td>840</td><td>0%</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>3</td><td>number_of_flavors</td><td><span class="badge badge-num">Numerical</span></td><td>381</td><td>54.6%</td><td><span class="badge badge-warn">⚠ Drop candidate</span></td></tr>
+          <tr><td>4</td><td>number_of_reviews</td><td><span class="badge badge-num">Numerical</span></td><td>821</td><td>2.3%</td><td><span class="badge badge-ok">~ Impute median</span></td></tr>
+          <tr><td>5</td><td>overall_rating</td><td><span class="badge badge-num">Numerical</span></td><td>821</td><td>2.3%</td><td><span class="badge badge-ok">~ Impute median</span></td></tr>
+          <tr><td>6</td><td>price</td><td><span class="badge badge-num">Numerical</span></td><td>840</td><td>0%</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>7</td><td>price_per_serving</td><td><span class="badge badge-num">Numerical</span></td><td>840</td><td>0%</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>8</td><td>product_category</td><td><span class="badge badge-cat">Categorical</span></td><td>669</td><td>20.4%</td><td><span class="badge badge-warn">⚠ KNN impute</span></td></tr>
+          <tr><td>9</td><td>product_description</td><td><span class="badge badge-cat">Categorical</span></td><td>840</td><td>0%</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>10</td><td>product_name</td><td><span class="badge badge-cat">Categorical</span></td><td>840</td><td>0%</td><td><span class="badge badge-ok">✓ Complete</span></td></tr>
+          <tr><td>11</td><td>top_flavor_rated</td><td><span class="badge badge-cat">Categorical</span></td><td>381</td><td>54.6%</td><td><span class="badge badge-warn">⚠ Drop candidate</span></td></tr>
+          <tr><td>12</td><td>verified_buyer_number</td><td><span class="badge badge-cat">Categorical</span></td><td>509</td><td>39.4%</td><td><span class="badge badge-warn">⚠ KNN impute</span></td></tr>
+          <tr><td>13</td><td>verified_buyer_rating</td><td><span class="badge badge-num">Numerical</span></td><td>509</td><td>39.4%</td><td><span class="badge badge-warn">⚠ KNN impute</span></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- DIAGNOSIS -->
-<section id="diagnosis">
+<!-- MISSING VALUES -->
+<section id="missing">
   <div class="wrap">
-    <div class="section-label">02 — Diagnosis Classes</div>
-    <h2 class="section-title">7 Skin Lesion Types</h2>
-    <p class="section-desc">HAM10000 classifies skin lesions into 7 groups, ranging from benign to malignant. Each label is verified by histopathology, clinical follow-up, or expert consensus.</p>
+    <div class="section-label">03 — Missing Values</div>
+    <h2 class="section-title">Báo Cáo Giá Trị Thiếu</h2>
+    <p class="section-desc">8 trong 14 cột có giá trị thiếu. Đáng chú ý: 3 cột có hơn 50% dữ liệu bị thiếu — đây là candidate để loại bỏ trước khi huấn luyện.</p>
 
-    <div class="dx-grid">
-      <div class="dx-item"><div class="dx-dot" style="background:#3D5A66"></div><span class="dx-code">NV</span><span class="dx-name">Melanocytic nevi (benign moles)</span><span class="dx-count">6,705</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#4A3428"></div><span class="dx-code">MEL</span><span class="dx-name">Melanoma (malignant skin cancer)</span><span class="dx-count">1,113</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#5E7A8A"></div><span class="dx-code">BKL</span><span class="dx-name">Benign keratosis-like lesions</span><span class="dx-count">1,099</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#7A8A8A"></div><span class="dx-code">BCC</span><span class="dx-name">Basal cell carcinoma</span><span class="dx-count">514</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#8a9aaa"></div><span class="dx-code">AKIEC</span><span class="dx-name">Actinic keratoses / Intraepithelial carcinoma</span><span class="dx-count">327</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#9aacbc"></div><span class="dx-code">VASC</span><span class="dx-name">Vascular lesions</span><span class="dx-count">142</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#1A1A1A"></div><span class="dx-code">DF</span><span class="dx-name">Dermatofibroma (benign fibrous nodule)</span><span class="dx-count">115</span></div>
-    </div>
+    <div class="card" style="max-width:780px;">
+      <div class="card-title">Missing value rate theo từng cột</div>
 
-    <div class="card">
-      <div class="card-title">Image count by diagnosis class</div>
-      <canvas id="dxChart"></canvas>
+      <div class="missing-row">
+        <span class="missing-label">number_of_flavors</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:54.6%;background:#4A3428;"></div></div>
+        <span class="missing-pct" style="color:#4A3428;">54.6%</span>
+        <span class="missing-rec">→ Consider dropping</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">top_flavor_rated</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:54.6%;background:#4A3428;"></div></div>
+        <span class="missing-pct" style="color:#4A3428;">54.6%</span>
+        <span class="missing-rec">→ Consider dropping</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">average_flavor_rating</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:53.9%;background:#4A3428;"></div></div>
+        <span class="missing-pct" style="color:#4A3428;">53.9%</span>
+        <span class="missing-rec">→ Consider dropping</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">verified_buyer_number</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:39.4%;background:#7a5a40;"></div></div>
+        <span class="missing-pct" style="color:#7a5a40;">39.4%</span>
+        <span class="missing-rec">→ KNN / Iterative impute</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">verified_buyer_rating</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:39.4%;background:#7a5a40;"></div></div>
+        <span class="missing-pct" style="color:#7a5a40;">39.4%</span>
+        <span class="missing-rec">→ KNN / Iterative impute</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">product_category</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:20.4%;background:#3D5A66;"></div></div>
+        <span class="missing-pct" style="color:#3D5A66;">20.4%</span>
+        <span class="missing-rec">→ KNN / Iterative impute</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">overall_rating</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:2.3%;background:#7A8A8A;"></div></div>
+        <span class="missing-pct" style="color:#7A8A8A;">2.3%</span>
+        <span class="missing-rec">→ Simple impute (mode/median)</span>
+      </div>
+      <div class="missing-row">
+        <span class="missing-label">number_of_reviews</span>
+        <div class="missing-bar-bg"><div class="missing-bar-fill" style="width:2.3%;background:#7A8A8A;"></div></div>
+        <span class="missing-pct" style="color:#7A8A8A;">2.3%</span>
+        <span class="missing-rec">→ Simple impute (mode/median)</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- IMBALANCE -->
-<section id="imbalance">
+<!-- NUMERICAL -->
+<section id="numerical">
   <div class="wrap">
-    <div class="section-label">03 — Class Imbalance</div>
-    <h2 class="section-title">Severe Class Imbalance</h2>
-    <p class="section-desc">The NV class (Melanocytic nevi) accounts for <strong>66.9%</strong> of the dataset — 58× more than the smallest class, DF. This is the primary challenge when training a classifier.</p>
+    <div class="section-label">04 — Numerical Features</div>
+    <h2 class="section-title">Phân Tích Đặc Trưng Số</h2>
+    <p class="section-desc">7 features số với các thống kê mô tả. Price và number_of_reviews có phân phối lệch phải đáng kể.</p>
 
-    <div class="card" style="max-width:700px;">
-      <div class="card-title">Percentage share per class</div>
-      <div class="imbalance-row"><span class="imb-label">NV</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:66.9%;background:#3D5A66"></div></div><span class="imb-count">6,705</span><span class="imb-pct">66.9%</span></div>
-      <div class="imbalance-row"><span class="imb-label">MEL</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:11.1%;background:#4A3428"></div></div><span class="imb-count">1,113</span><span class="imb-pct">11.1%</span></div>
-      <div class="imbalance-row"><span class="imb-label">BKL</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:11.0%;background:#5E7A8A"></div></div><span class="imb-count">1,099</span><span class="imb-pct">11.0%</span></div>
-      <div class="imbalance-row"><span class="imb-label">BCC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:5.1%;background:#7A8A8A"></div></div><span class="imb-count">514</span><span class="imb-pct">5.1%</span></div>
-      <div class="imbalance-row"><span class="imb-label">AKIEC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:3.3%;background:#8a9aaa"></div></div><span class="imb-count">327</span><span class="imb-pct">3.3%</span></div>
-      <div class="imbalance-row"><span class="imb-label">VASC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:1.4%;background:#9aacbc"></div></div><span class="imb-count">142</span><span class="imb-pct">1.4%</span></div>
-      <div class="imbalance-row"><span class="imb-label">DF</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:1.1%;background:#1A1A1A"></div></div><span class="imb-count">115</span><span class="imb-pct">1.1%</span></div>
+    <div class="tbl-wrap" style="margin-bottom:28px;">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Mean</th><th>Median</th><th>Std</th><th>Min</th><th>Max</th><th>Outliers</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>price</strong></td><td>$30.29</td><td>$27.99</td><td>17.36</td><td>$2.49</td><td>$119.53</td><td><span class="badge badge-warn">33 (3.9%)</span></td></tr>
+          <tr><td><strong>number_of_reviews</strong></td><td>483.51</td><td>95.00</td><td>1124.74</td><td>1</td><td>9,926</td><td><span class="badge badge-warn">102 (12.1%)</span></td></tr>
+          <tr><td><strong>overall_rating</strong></td><td>8.95</td><td>9.10</td><td>0.73</td><td>1.0</td><td>10.0</td><td><span class="badge badge-ok">24 (2.9%)</span></td></tr>
+          <tr><td><strong>price_per_serving</strong></td><td>$1.03</td><td>$0.83</td><td>0.86</td><td>$0.02</td><td>$7.99</td><td><span class="badge badge-warn">46 (5.5%)</span></td></tr>
+          <tr><td><strong>number_of_flavors</strong></td><td>6.29</td><td>4.00</td><td>7.09</td><td>1</td><td>43</td><td><span class="badge badge-ok">23 (2.7%)</span></td></tr>
+          <tr><td><strong>average_flavor_rating</strong></td><td>8.67</td><td>8.80</td><td>0.94</td><td>1.0</td><td>10.0</td><td><span class="badge badge-ok">15 (1.8%)</span></td></tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-</section>
-
-<!-- DEMOGRAPHICS -->
-<section id="demographics">
-  <div class="wrap">
-    <div class="section-label">04 — Patient Demographics</div>
-    <h2 class="section-title">Patient Demographics</h2>
-    <p class="section-desc">Median patient age is 45, with concentration in the 40–60 age group. Male patients represent the majority in this dataset.</p>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Distribution by Sex</div>
-        <canvas id="sexChart"></canvas>
+        <div class="card-title">Price Distribution (binned)</div>
+        <canvas id="priceChart"></canvas>
       </div>
       <div class="card">
-        <div class="card-title">Patient Age Distribution</div>
-        <canvas id="ageChart"></canvas>
+        <div class="card-title">Overall Rating Distribution</div>
+        <canvas id="ratingChart"></canvas>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LOCALIZATION -->
-<section id="localization">
+<!-- CATEGORICAL -->
+<section id="categorical">
   <div class="wrap">
-    <div class="section-label">05 — Lesion Localization</div>
-    <h2 class="section-title">Lesion Location on the Body</h2>
-    <p class="section-desc">Lesions are distributed across 15 body sites. The back and lower extremities are the two most common locations.</p>
+    <div class="section-label">05 — Categorical Features</div>
+    <h2 class="section-title">Phân Tích Đặc Trưng Phân Loại</h2>
+    <p class="section-desc">Top brands và product categories trong dataset. Optimum Nutrition là thương hiệu phổ biến nhất (8.45%), Whey Protein là category chiếm đông nhất (10.95%).</p>
 
-    <div class="card">
-      <div class="card-title">Top 10 body sites by lesion count</div>
-      <canvas id="locChart" style="max-height:320px;"></canvas>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Top 10 Brands by product count</div>
+        <canvas id="brandChart" style="max-height:320px;"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">Top 10 Product Categories</div>
+        <canvas id="categoryChart" style="max-height:320px;"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTLIERS -->
+<section id="outliers">
+  <div class="wrap">
+    <div class="section-label">06 — Outlier Detection</div>
+    <h2 class="section-title">Phát Hiện Giá Trị Ngoại Lệ</h2>
+    <p class="section-desc">Sử dụng phương pháp IQR để phát hiện outliers. number_of_reviews có mức độ outlier cao nhất (12.14%) — sản phẩm rất nổi tiếng tạo ra đuôi dài bên phải.</p>
+
+    <div class="card" style="max-width:700px;">
+      <div class="card-title">Outlier count (IQR method)</div>
+      <div class="outlier-row">
+        <span class="outlier-feat">number_of_reviews</span>
+        <div class="outlier-bar-bg"><div class="outlier-bar-fill" style="width:100%;background:#4A3428;"></div></div>
+        <span class="outlier-pct">12.14%</span>
+        <span class="outlier-sev sev-high">HIGH</span>
+      </div>
+      <div class="outlier-row">
+        <span class="outlier-feat">price_per_serving</span>
+        <div class="outlier-bar-bg"><div class="outlier-bar-fill" style="width:45%;background:#7a5a40;"></div></div>
+        <span class="outlier-pct">5.48%</span>
+        <span class="outlier-sev sev-high">HIGH</span>
+      </div>
+      <div class="outlier-row">
+        <span class="outlier-feat">price</span>
+        <div class="outlier-bar-bg"><div class="outlier-bar-fill" style="width:32%;background:#3D5A66;"></div></div>
+        <span class="outlier-pct">3.93%</span>
+        <span class="outlier-sev sev-med">MEDIUM</span>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;" class="card" style="max-width:700px;">
+      <div class="card-title">IQR Bounds Summary</div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Outlier Count</th><th>Percentage</th><th>Severity</th><th>Valid Range (IQR)</th></tr></thead>
+          <tbody>
+            <tr><td>Price</td><td>33</td><td>3.93%</td><td><span class="badge badge-ok">Medium</span></td><td>[-$12.02, $68.00]</td></tr>
+            <tr><td>Number of Reviews</td><td>102</td><td>12.14%</td><td><span class="badge badge-warn">High</span></td><td>[-544.50, 971.50]</td></tr>
+            <tr><td>Price Per Serving</td><td>46</td><td>5.48%</td><td><span class="badge badge-warn">High</span></td><td>[-$0.92, $2.68]</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORRELATION -->
+<section id="correlation">
+  <div class="wrap">
+    <div class="section-label">07 — Correlation Analysis</div>
+    <h2 class="section-title">Tương Quan Giữa Các Đặc Trưng</h2>
+    <p class="section-desc">Hai cặp tương quan cao (|r| > 0.5) được phát hiện, gợi ý khả năng multicollinearity cần xử lý.</p>
+
+    <div class="corr-row">
+      <span class="corr-val high">0.747</span>
+      <div>
+        <div class="corr-pair">number_of_flavors ↔ number_of_reviews</div>
+        <span style="font-size:11px;color:var(--muted);">Sản phẩm có nhiều hương vị thường được review nhiều hơn — tương quan thuận mạnh.</span>
+      </div>
+    </div>
+    <div class="corr-row">
+      <span class="corr-val med">0.692</span>
+      <div>
+        <div class="corr-pair">average_flavor_rating ↔ overall_rating</div>
+        <span style="font-size:11px;color:var(--muted);">Rating hương vị phản ánh chặt chẽ rating tổng thể — người dùng đánh giá toàn diện.</span>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;">
+      <div class="card">
+        <div class="card-title">Correlation heatmap (key numerical features)</div>
+        <canvas id="corrChart" style="max-height:260px;"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section id="target">
+  <div class="wrap">
+    <div class="section-label">08 — Target Variable</div>
+    <h2 class="section-title">Biến Mục Tiêu: Price Tier</h2>
+    <p class="section-desc">Biến mục tiêu được tạo bằng cách phân ngưỡng giá tại median ($27.99): sản phẩm trên median là <strong>Premium</strong>, dưới hoặc bằng là <strong>Standard</strong>. Phân phối gần cân bằng.</p>
+
+    <div class="tier-grid" style="margin-bottom:28px;max-width:500px;">
+      <div class="tier-item">
+        <div class="tier-name">Standard (≤ $27.99)</div>
+        <div class="tier-count" style="color:#3D5A66;">423</div>
+        <div class="tier-pct">50.36% of dataset</div>
+      </div>
+      <div class="tier-item">
+        <div class="tier-name">Premium (> $27.99)</div>
+        <div class="tier-count" style="color:#4A3428;">417</div>
+        <div class="tier-pct">49.64% of dataset</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Price Tier Distribution</div>
+        <canvas id="tierChart"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">Top categories với tỷ lệ Premium cao nhất</div>
+        <canvas id="premiumChart" style="max-height:280px;"></canvas>
+      </div>
     </div>
   </div>
 </section>
@@ -394,51 +584,51 @@
 <!-- KEY FINDINGS -->
 <section id="findings">
   <div class="wrap">
-    <div class="section-label">06 — Summary</div>
+    <div class="section-label">09 — Summary</div>
     <h2 class="section-title">Key Findings</h2>
-    <p class="section-desc">Core insights derived from the EDA pipeline on the HAM10000 dataset.</p>
+    <p class="section-desc">Các insight chính từ quá trình EDA trên bộ dữ liệu sản phẩm dinh dưỡng thể hình.</p>
 
     <div class="findings">
       <div class="finding">
         <div class="finding-icon">⚠️</div>
         <div class="finding-text">
-          <strong>Extreme Class Imbalance</strong>
-          <span>The NV class accounts for 66.9% of the dataset — 58× the size of the smallest class (DF, 115 images). Oversampling, weighted loss, or augmentation is required.</span>
+          <strong>Missing values nghiêm trọng ở 3 cột</strong>
+          <span>number_of_flavors, top_flavor_rated và average_flavor_rating đều thiếu >54% dữ liệu — nên loại bỏ trước khi huấn luyện mô hình.</span>
         </div>
       </div>
       <div class="finding">
-        <div class="finding-icon">🔬</div>
+        <div class="finding-icon">🎯</div>
         <div class="finding-text">
-          <strong>Melanoma Represents Only 11.1%</strong>
-          <span>Despite being the most dangerous skin cancer, MEL has only 1,113 samples. High recall on this class is critical for clinical safety.</span>
+          <strong>Target cân bằng tốt</strong>
+          <span>Tỷ lệ 50.36% / 49.64% (Standard/Premium) — dataset không bị imbalanced, không cần oversampling.</span>
         </div>
       </div>
       <div class="finding">
-        <div class="finding-icon">👨</div>
+        <div class="finding-icon">📊</div>
         <div class="finding-text">
-          <strong>Male Patient Majority</strong>
-          <span>The dataset is skewed toward male patients, which may limit generalizability for female patients without careful evaluation.</span>
+          <strong>Reviews bị skewed nặng</strong>
+          <span>Mean 483 vs median 95 — phân phối lệch phải cực mạnh. Nên dùng log transform trước khi đưa vào model.</span>
         </div>
       </div>
       <div class="finding">
-        <div class="finding-icon">📍</div>
+        <div class="finding-icon">🏋️</div>
         <div class="finding-text">
-          <strong>Back & Lower Extremity Most Common</strong>
-          <span>Lesions cluster most heavily on the back and lower extremities — consistent with sun exposure habits and dermatological biology.</span>
+          <strong>Whey Protein chiếm 72.8% Premium</strong>
+          <span>Các sản phẩm Whey Protein Isolate (85.3%) và Improve Workout Products (74.2%) có tỷ lệ Premium cao nhất.</span>
         </div>
       </div>
       <div class="finding">
-        <div class="finding-icon">🎂</div>
+        <div class="finding-icon">🔗</div>
         <div class="finding-text">
-          <strong>Dominant Age Group: 40–60 Years</strong>
-          <span>Median patient age is 45. Older patients carry higher risk for malignant lesion types such as MEL and BCC.</span>
+          <strong>Tương quan cao giữa flavors & reviews</strong>
+          <span>r = 0.747 giữa số hương vị và số review — sản phẩm đa dạng hương vị thu hút nhiều người dùng hơn.</span>
         </div>
       </div>
       <div class="finding">
-        <div class="finding-icon">🖼️</div>
+        <div class="finding-icon">⭐</div>
         <div class="finding-text">
-          <strong>10,015 Images — International Benchmark</strong>
-          <span>HAM10000 is the largest and most widely used dermatological dataset in the medical Computer Vision research community.</span>
+          <strong>Rating tổng thể rất cao (mean 8.95/10)</strong>
+          <span>Phần lớn sản phẩm được đánh giá tốt. Outliers ở phía thấp (rating < 7.3) chỉ chiếm 2.86%.</span>
         </div>
       </div>
     </div>
@@ -446,109 +636,109 @@
 </section>
 
 <footer>
-  <span>Task 02 — Image EDA · HAM10000 Skin Cancer Dataset</span>
-  <span>Dataset: <code>HAM10000_metadata.csv</code> · 10,015 records · 7 classes</span>
+  <span>Task 03 — Tabular EDA · Bodybuilding Nutrition Products</span>
+  <span>Dataset: <code>bodybuilding_nutrition_products.csv</code> · 840 records · 14 features</span>
 </footer>
 
 <script>
-const gridC = 'rgba(60,80,90,0.12)';
-const tickC = 'rgba(26,26,26,0.55)';
+const gridC = 'rgba(60,80,90,0.1)';
+const tickC = 'rgba(26,26,26,0.5)';
+const accent1 = '#4A3428';
+const accent2 = '#3D5A66';
 
-// DIAGNOSIS BAR CHART
-new Chart(document.getElementById('dxChart'), {
-  type: 'bar',
-  data: {
-    labels: ['NV','MEL','BKL','BCC','AKIEC','VASC','DF'],
-    datasets: [{
-      label: 'Images',
-      data: [6705, 1113, 1099, 514, 327, 142, 115],
-      backgroundColor: ['#3D5A66','#4A3428','#5E7A8A','#7A8A8A','#8a9aaa','#9aacbc','#1A1A1A'],
-      borderRadius: 6,
-      borderSkipped: false
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { grid: { color: gridC }, ticks: { color: tickC } },
-      y: { grid: { color: gridC }, ticks: { color: tickC } }
-    }
-  }
-});
-
-// SEX DONUT
-new Chart(document.getElementById('sexChart'), {
+// SPLIT DONUT
+new Chart(document.getElementById('splitChart'), {
   type: 'doughnut',
   data: {
-    labels: ['Male', 'Female', 'Unknown'],
-    datasets: [{
-      data: [5406, 4318, 291],
-      backgroundColor: ['#3D5A66','#4A3428','#CDD0CE'],
-      borderColor: '#F0EFEB',
-      borderWidth: 3,
-      hoverOffset: 8
-    }]
+    labels: ['Train (562)', 'Test (278)'],
+    datasets: [{ data: [562, 278], backgroundColor: [accent1, accent2], borderColor: '#F0EFEB', borderWidth: 3, hoverOffset: 6 }]
   },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins: {
-      legend: { position: 'bottom', labels: { color: tickC, padding: 16, font: { size: 12 } } }
-    }
-  }
+  options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { color: tickC, padding: 14 } } } }
 });
 
-// AGE HISTOGRAM
-new Chart(document.getElementById('ageChart'), {
-  type: 'bar',
+// TYPE DONUT
+new Chart(document.getElementById('typeChart'), {
+  type: 'doughnut',
   data: {
-    labels: ['<20','20–29','30–39','40–49','50–59','60–69','70–79','80+'],
-    datasets: [{
-      label: 'Patients',
-      data: [48, 420, 980, 2100, 2800, 2150, 1100, 360],
-      backgroundColor: 'rgba(61,90,102,0.72)',
-      borderColor: '#3D5A66',
-      borderWidth: 1,
-      borderRadius: 4,
-      borderSkipped: false
-    }]
+    labels: ['Numerical (7)', 'Categorical (7)'],
+    datasets: [{ data: [7, 7], backgroundColor: [accent2, '#9a7a60'], borderColor: '#F0EFEB', borderWidth: 3, hoverOffset: 6 }]
   },
-  options: {
-    responsive: true, maintainAspectRatio: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { grid: { color: gridC }, ticks: { color: tickC } },
-      y: { grid: { color: gridC }, ticks: { color: tickC } }
-    }
-  }
+  options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { color: tickC, padding: 14 } } } }
 });
 
-// LOCALIZATION HORIZONTAL BAR
-new Chart(document.getElementById('locChart'), {
+// PRICE HISTOGRAM
+new Chart(document.getElementById('priceChart'), {
   type: 'bar',
   data: {
-    labels: [
-      'Abdomen','Ear','Face','Foot','Genital',
-      'Hand','Neck','Scalp','Trunk','Chest',
-      'Upper Extremity','Acral','Lower Extremity','Unknown','Back'
-    ].reverse(),
-    datasets: [{
-      label: 'Images',
-      data: [222,77,601,95,33,63,189,378,1112,243,811,54,1767,57,2307].reverse(),
-      backgroundColor: 'rgba(74,52,40,0.72)',
-      borderColor: '#4A3428',
-      borderWidth: 1,
-      borderRadius: 4,
-      borderSkipped: false
-    }]
+    labels: ['$0–10','$10–20','$20–30','$30–40','$40–50','$50–60','$60–70','$70+'],
+    datasets: [{ label: 'Products', data: [28, 198, 240, 158, 92, 54, 38, 32], backgroundColor: 'rgba(74,52,40,0.65)', borderColor: accent1, borderWidth: 1, borderRadius: 4, borderSkipped: false }]
+  },
+  options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridC }, ticks: { color: tickC } }, y: { grid: { color: gridC }, ticks: { color: tickC } } } }
+});
+
+// RATING HISTOGRAM
+new Chart(document.getElementById('ratingChart'), {
+  type: 'bar',
+  data: {
+    labels: ['1–5','5–6','6–7','7–8','8–9','9–10'],
+    datasets: [{ label: 'Products', data: [8, 5, 11, 62, 290, 445], backgroundColor: 'rgba(61,90,102,0.65)', borderColor: accent2, borderWidth: 1, borderRadius: 4, borderSkipped: false }]
+  },
+  options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridC }, ticks: { color: tickC } }, y: { grid: { color: gridC }, ticks: { color: tickC } } } }
+});
+
+// BRAND HORIZONTAL BAR
+new Chart(document.getElementById('brandChart'), {
+  type: 'bar',
+  data: {
+    labels: ['AllMax Nutrition','MusclePharm','Animal','Dymatize','GAT','Universal Nutrition','NOW','EVLUTION NUTRITION','MuscleTech','Optimum Nutrition'].reverse(),
+    datasets: [{ label: 'Products', data: [27,27,28,32,32,39,46,52,57,71].reverse(), backgroundColor: 'rgba(74,52,40,0.6)', borderColor: accent1, borderWidth: 1, borderRadius: 3, borderSkipped: false }]
+  },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridC }, ticks: { color: tickC } }, y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } } } }
+});
+
+// CATEGORY HORIZONTAL BAR
+new Chart(document.getElementById('categoryChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Beta-Alanine','Glutamine','Caffeine','Build Muscle','Improve Workout','Amino Acids','Whey Isolate','Creatine','BCAAs','Whey Protein'].reverse(),
+    datasets: [{ label: 'Products', data: [23,25,28,30,31,38,34,40,46,92].reverse(), backgroundColor: 'rgba(61,90,102,0.6)', borderColor: accent2, borderWidth: 1, borderRadius: 3, borderSkipped: false }]
+  },
+  options: { indexAxis: 'y', responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridC }, ticks: { color: tickC } }, y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } } } }
+});
+
+// CORRELATION APPROXIMATION (bar chart)
+new Chart(document.getElementById('corrChart'), {
+  type: 'bar',
+  data: {
+    labels: ['flavors↔reviews', 'flavor_rating↔overall_rating', 'price↔price_per_serving', 'reviews↔overall_rating', 'price↔reviews'],
+    datasets: [{ label: 'Correlation |r|', data: [0.747, 0.692, 0.38, 0.21, 0.15], backgroundColor: ['#4A3428','#4A3428','#7a8a8a','#aaa','#bbb'], borderRadius: 4, borderSkipped: false }]
+  },
+  options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { display: false } }, scales: { x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } }, y: { grid: { color: gridC }, ticks: { color: tickC }, min: 0, max: 1 } } }
+});
+
+// TIER DONUT
+new Chart(document.getElementById('tierChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Standard (≤$27.99)', 'Premium (>$27.99)'],
+    datasets: [{ data: [423, 417], backgroundColor: [accent2, accent1], borderColor: '#F0EFEB', borderWidth: 3, hoverOffset: 8 }]
+  },
+  options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { color: tickC, padding: 14 } } } }
+});
+
+// PREMIUM RATE BY CATEGORY
+new Chart(document.getElementById('premiumChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Whey Protein\nIsolate','Improve\nWorkout','Whey\nProtein','Build\nMuscle','Beta-\nAlanine'].reverse(),
+    datasets: [{ label: 'Premium %', data: [85.29, 74.19, 72.83, 66.67, 60.87].reverse(), backgroundColor: 'rgba(74,52,40,0.65)', borderColor: accent1, borderWidth: 1, borderRadius: 4, borderSkipped: false }]
   },
   options: {
-    indexAxis: 'y',
-    responsive: true, maintainAspectRatio: true,
+    indexAxis: 'y', responsive: true, maintainAspectRatio: true,
     plugins: { legend: { display: false } },
     scales: {
-      x: { grid: { color: gridC }, ticks: { color: tickC } },
-      y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 11 } } }
+      x: { grid: { color: gridC }, ticks: { color: tickC, callback: v => v + '%' }, min: 0, max: 100 },
+      y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } }
     }
   }
 });
