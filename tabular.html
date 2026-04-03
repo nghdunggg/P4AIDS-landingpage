@@ -253,7 +253,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-left">
     <a href="index.html" class="back-link">
@@ -275,15 +274,14 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="wrap">
     <div class="eyebrow">Task 03 — Tabular Prediction</div>
     <h1>Bodybuilding Nutrition<br/><em>Products Dataset</em></h1>
     <p class="hero-desc">
-      Dataset chứa thông tin về các sản phẩm dinh dưỡng thể hình từ nền tảng Bodybuilding.com,
-      bao gồm giá cả, đánh giá, thương hiệu và phân loại sản phẩm.
-      Mục tiêu: phân loại sản phẩm thành <strong>Premium</strong> hay <strong>Standard</strong> dựa trên ngưỡng giá median.
+      The dataset contains information about bodybuilding nutrition products from Bodybuilding.com, 
+      including prices, ratings, brands, and product categories. 
+      Goal: Classify products as <strong>Premium</strong> or <strong>Standard</strong> based on the median price threshold.
     </p>
     <div class="hero-stats">
       <div class="hstat"><span class="hstat-val">840</span><span class="hstat-lbl">Total Samples</span></div>
@@ -294,12 +292,11 @@
   </div>
 </div>
 
-<!-- OVERVIEW -->
 <section id="overview">
   <div class="wrap">
     <div class="section-label">01 — Dataset Overview</div>
-    <h2 class="section-title">Tổng Quan Dataset</h2>
-    <p class="section-desc">Dataset được chia thành tập train (562 mẫu) và tập test (278 mẫu). Không có giá trị trùng lặp. Tuy nhiên, nhiều cột có tỷ lệ missing cao đáng kể.</p>
+    <h2 class="section-title">Dataset Overview</h2>
+    <p class="section-desc">The dataset is split into a training set (562 samples) and a testing set (278 samples). There are no duplicate values. However, several columns have significantly high missing rates.</p>
 
     <div class="stat-grid">
       <div class="stat-card s1"><div class="stat-val">840</div><div class="stat-lbl">Total Records</div></div>
@@ -321,12 +318,11 @@
   </div>
 </section>
 
-<!-- SCHEMA -->
 <section id="schema">
   <div class="wrap">
     <div class="section-label">02 — Schema</div>
-    <h2 class="section-title">Mô Tả Các Cột</h2>
-    <p class="section-desc">14 features bao gồm thông tin sản phẩm, thương hiệu, giá cả, đánh giá và danh mục.</p>
+    <h2 class="section-title">Column Descriptions</h2>
+    <p class="section-desc">14 features including product information, brand, price, rating, and category.</p>
 
     <div class="tbl-wrap">
       <table>
@@ -354,15 +350,14 @@
   </div>
 </section>
 
-<!-- MISSING VALUES -->
 <section id="missing">
   <div class="wrap">
     <div class="section-label">03 — Missing Values</div>
-    <h2 class="section-title">Báo Cáo Giá Trị Thiếu</h2>
-    <p class="section-desc">8 trong 14 cột có giá trị thiếu. Đáng chú ý: 3 cột có hơn 50% dữ liệu bị thiếu — đây là candidate để loại bỏ trước khi huấn luyện.</p>
+    <h2 class="section-title">Missing Values Report</h2>
+    <p class="section-desc">8 out of 14 columns have missing values. Notably, 3 columns have more than 50% missing data — these are candidates for removal before training.</p>
 
     <div class="card" style="max-width:780px;">
-      <div class="card-title">Missing value rate theo từng cột</div>
+      <div class="card-title">Missing value rate by column</div>
 
       <div class="missing-row">
         <span class="missing-label">number_of_flavors</span>
@@ -416,12 +411,11 @@
   </div>
 </section>
 
-<!-- NUMERICAL -->
 <section id="numerical">
   <div class="wrap">
     <div class="section-label">04 — Numerical Features</div>
-    <h2 class="section-title">Phân Tích Đặc Trưng Số</h2>
-    <p class="section-desc">7 features số với các thống kê mô tả. Price và number_of_reviews có phân phối lệch phải đáng kể.</p>
+    <h2 class="section-title">Numerical Feature Analysis</h2>
+    <p class="section-desc">7 numerical features with descriptive statistics. Price and number_of_reviews show significant right-skewed distributions.</p>
 
     <div class="tbl-wrap" style="margin-bottom:28px;">
       <table>
@@ -452,12 +446,11 @@
   </div>
 </section>
 
-<!-- CATEGORICAL -->
 <section id="categorical">
   <div class="wrap">
     <div class="section-label">05 — Categorical Features</div>
-    <h2 class="section-title">Phân Tích Đặc Trưng Phân Loại</h2>
-    <p class="section-desc">Top brands và product categories trong dataset. Optimum Nutrition là thương hiệu phổ biến nhất (8.45%), Whey Protein là category chiếm đông nhất (10.95%).</p>
+    <h2 class="section-title">Categorical Feature Analysis</h2>
+    <p class="section-desc">Top brands and product categories in the dataset. Optimum Nutrition is the most common brand (8.45%), and Whey Protein is the largest category (10.95%).</p>
 
     <div class="grid-2">
       <div class="card">
@@ -472,12 +465,11 @@
   </div>
 </section>
 
-<!-- OUTLIERS -->
 <section id="outliers">
   <div class="wrap">
     <div class="section-label">06 — Outlier Detection</div>
-    <h2 class="section-title">Phát Hiện Giá Trị Ngoại Lệ</h2>
-    <p class="section-desc">Sử dụng phương pháp IQR để phát hiện outliers. number_of_reviews có mức độ outlier cao nhất (12.14%) — sản phẩm rất nổi tiếng tạo ra đuôi dài bên phải.</p>
+    <h2 class="section-title">Outlier Detection</h2>
+    <p class="section-desc">Using the IQR method to detect outliers. number_of_reviews has the highest outlier rate (12.14%) — highly popular products create a long right tail.</p>
 
     <div class="card" style="max-width:700px;">
       <div class="card-title">Outlier count (IQR method)</div>
@@ -517,25 +509,24 @@
   </div>
 </section>
 
-<!-- CORRELATION -->
 <section id="correlation">
   <div class="wrap">
     <div class="section-label">07 — Correlation Analysis</div>
-    <h2 class="section-title">Tương Quan Giữa Các Đặc Trưng</h2>
-    <p class="section-desc">Hai cặp tương quan cao (|r| > 0.5) được phát hiện, gợi ý khả năng multicollinearity cần xử lý.</p>
+    <h2 class="section-title">Correlation Analysis</h2>
+    <p class="section-desc">Two high correlation pairs (|r| > 0.5) were detected, suggesting potential multicollinearity that needs handling.</p>
 
     <div class="corr-row">
       <span class="corr-val high">0.747</span>
       <div>
         <div class="corr-pair">number_of_flavors ↔ number_of_reviews</div>
-        <span style="font-size:11px;color:var(--muted);">Sản phẩm có nhiều hương vị thường được review nhiều hơn — tương quan thuận mạnh.</span>
+        <span style="font-size:11px;color:var(--muted);">Products with more flavors tend to have more reviews — strong positive correlation.</span>
       </div>
     </div>
     <div class="corr-row">
       <span class="corr-val med">0.692</span>
       <div>
         <div class="corr-pair">average_flavor_rating ↔ overall_rating</div>
-        <span style="font-size:11px;color:var(--muted);">Rating hương vị phản ánh chặt chẽ rating tổng thể — người dùng đánh giá toàn diện.</span>
+        <span style="font-size:11px;color:var(--muted);">Flavor ratings closely reflect overall ratings — users evaluate comprehensively.</span>
       </div>
     </div>
 
@@ -548,12 +539,11 @@
   </div>
 </section>
 
-<!-- TARGET -->
 <section id="target">
   <div class="wrap">
     <div class="section-label">08 — Target Variable</div>
-    <h2 class="section-title">Biến Mục Tiêu: Price Tier</h2>
-    <p class="section-desc">Biến mục tiêu được tạo bằng cách phân ngưỡng giá tại median ($27.99): sản phẩm trên median là <strong>Premium</strong>, dưới hoặc bằng là <strong>Standard</strong>. Phân phối gần cân bằng.</p>
+    <h2 class="section-title">Target Variable: Price Tier</h2>
+    <p class="section-desc">The target variable was created by thresholding the price at the median ($27.99): products above the median are <strong>Premium</strong>, those below or equal are <strong>Standard</strong>. The distribution is nearly balanced.</p>
 
     <div class="tier-grid" style="margin-bottom:28px;max-width:500px;">
       <div class="tier-item">
@@ -574,61 +564,60 @@
         <canvas id="tierChart"></canvas>
       </div>
       <div class="card">
-        <div class="card-title">Top categories với tỷ lệ Premium cao nhất</div>
+        <div class="card-title">Top categories with highest Premium rate</div>
         <canvas id="premiumChart" style="max-height:280px;"></canvas>
       </div>
     </div>
   </div>
 </section>
 
-<!-- KEY FINDINGS -->
 <section id="findings">
   <div class="wrap">
     <div class="section-label">09 — Summary</div>
     <h2 class="section-title">Key Findings</h2>
-    <p class="section-desc">Các insight chính từ quá trình EDA trên bộ dữ liệu sản phẩm dinh dưỡng thể hình.</p>
+    <p class="section-desc">Key insights from the EDA process on the bodybuilding nutrition product dataset.</p>
 
     <div class="findings">
       <div class="finding">
         <div class="finding-icon">⚠️</div>
         <div class="finding-text">
-          <strong>Missing values nghiêm trọng ở 3 cột</strong>
-          <span>number_of_flavors, top_flavor_rated và average_flavor_rating đều thiếu >54% dữ liệu — nên loại bỏ trước khi huấn luyện mô hình.</span>
+          <strong>Serious missing values in 3 columns</strong>
+          <span>number_of_flavors, top_flavor_rated, and average_flavor_rating are all missing >54% of data — recommend removal before model training.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">🎯</div>
         <div class="finding-text">
-          <strong>Target cân bằng tốt</strong>
-          <span>Tỷ lệ 50.36% / 49.64% (Standard/Premium) — dataset không bị imbalanced, không cần oversampling.</span>
+          <strong>Well-balanced target</strong>
+          <span>The ratio is 50.36% / 49.64% (Standard/Premium) — the dataset is not imbalanced, so oversampling is not required.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">📊</div>
         <div class="finding-text">
-          <strong>Reviews bị skewed nặng</strong>
-          <span>Mean 483 vs median 95 — phân phối lệch phải cực mạnh. Nên dùng log transform trước khi đưa vào model.</span>
+          <strong>Heavily skewed reviews</strong>
+          <span>Mean 483 vs median 95 — extremely strong right-skewed distribution. Recommend log transform before inputting into the model.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">🏋️</div>
         <div class="finding-text">
-          <strong>Whey Protein chiếm 72.8% Premium</strong>
-          <span>Các sản phẩm Whey Protein Isolate (85.3%) và Improve Workout Products (74.2%) có tỷ lệ Premium cao nhất.</span>
+          <strong>Whey Protein accounts for 72.8% of Premium</strong>
+          <span>Whey Protein Isolate (85.3%) and Improve Workout Products (74.2%) have the highest Premium rates.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">🔗</div>
         <div class="finding-text">
-          <strong>Tương quan cao giữa flavors & reviews</strong>
-          <span>r = 0.747 giữa số hương vị và số review — sản phẩm đa dạng hương vị thu hút nhiều người dùng hơn.</span>
+          <strong>High correlation between flavors & reviews</strong>
+          <span>r = 0.747 between the number of flavors and number of reviews — products with diverse flavors attract more users.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">⭐</div>
         <div class="finding-text">
-          <strong>Rating tổng thể rất cao (mean 8.95/10)</strong>
-          <span>Phần lớn sản phẩm được đánh giá tốt. Outliers ở phía thấp (rating < 7.3) chỉ chiếm 2.86%.</span>
+          <strong>Very high overall ratings (mean 8.95/10)</strong>
+          <span>Most products are well-rated. Low-end outliers (rating < 7.3) only account for 2.86%.</span>
         </div>
       </div>
     </div>
