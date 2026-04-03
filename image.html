@@ -8,15 +8,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #EDE0CE;
-    --surface: #E5D5BE;
-    --card: #F2EAD9;
-    --border: rgba(90,55,45,0.12);
-    --accent: #5a7080;
-    --accent-r: #6B2D2D;
-    --text: #3B2220;
-    --muted: rgba(59,34,32,0.5);
-    --tag-bg: rgba(90,112,128,0.08);
+    --bg: #E6E4DA;
+    --surface: #CDD0CE;
+    --card: #F0EFEB;
+    --border: rgba(60,80,90,0.2);
+    --accent: #3D5A66;
+    --accent-r: #4A3428;
+    --text: #1A1A1A;
+    --muted: rgba(26,26,26,0.55);
+    --tag-bg: rgba(61,90,102,0.09);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +32,7 @@
   /* NAV */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(237,224,206,0.96);
+    background: rgba(230,228,218,0.96);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 5vw;
@@ -74,14 +74,14 @@
     content: '';
     position: absolute; top: -100px; left: -60px;
     width: 550px; height: 550px;
-    background: radial-gradient(circle, rgba(90,112,128,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(107,123,132,0.09) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero::after {
     content: '';
     position: absolute; bottom: -80px; right: -40px;
     width: 350px; height: 350px;
-    background: radial-gradient(circle, rgba(107,45,45,0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(94,75,59,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
   .eyebrow {
@@ -134,7 +134,7 @@
     background: var(--card); border: 1px solid var(--border);
     border-radius: 12px; padding: 28px; transition: border-color .2s;
   }
-  .card:hover { border-color: rgba(90,112,128,0.3); }
+  .card:hover { border-color: rgba(61,90,102,0.4); }
   .card-title { font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 20px; letter-spacing: 0.04em; }
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -151,17 +151,17 @@
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
   }
   .s1::before { background: var(--accent); }
-  .s2::before { background: #8a6050; }
-  .s3::before { background: var(--accent-r); }
-  .s4::before { background: #a67b6b; }
+  .s2::before { background: var(--accent-r); }
+  .s3::before { background: #7A8A8A; }
+  .s4::before { background: #5E7A8A; }
   .stat-val {
     font-family: 'Cormorant Garamond', serif;
     font-size: 28px; font-weight: 600; line-height: 1; margin-bottom: 5px;
   }
   .s1 .stat-val { color: var(--accent); }
-  .s2 .stat-val { color: #8a6050; }
-  .s3 .stat-val { color: var(--accent-r); }
-  .s4 .stat-val { color: #a67b6b; }
+  .s2 .stat-val { color: var(--accent-r); }
+  .s3 .stat-val { color: #7A8A8A; }
+  .s4 .stat-val { color: #5E7A8A; }
   .stat-lbl { font-size: 11px; color: var(--muted); }
 
   /* DIAGNOSIS LEGEND */
@@ -218,11 +218,11 @@
     text-transform: uppercase; padding: 10px 14px;
     border-bottom: 1px solid var(--border);
   }
-  td { padding: 10px 14px; border-bottom: 1px solid rgba(90,55,45,0.06); }
-  tr:hover td { background: rgba(90,55,45,0.02); }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(61,90,102,0.1); }
+  tr:hover td { background: rgba(61,90,102,0.05); }
   .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 10px; font-family: 'JetBrains Mono', monospace; }
-  .badge-warn { background: rgba(107,45,45,0.1); color: var(--accent-r); }
-  .badge-ok { background: rgba(90,112,128,0.1); color: var(--accent); }
+  .badge-warn { background: rgba(74,52,40,0.15); color: var(--accent-r); }
+  .badge-ok { background: rgba(61,90,102,0.15); color: var(--accent); }
 
   canvas { max-height: 300px; }
 
@@ -247,7 +247,7 @@
   <div class="nav-left">
     <a href="index.html" class="back-link">
       <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Trang chủ
+      Home
     </a>
     <div class="nav-title">Task 02 — Image EDA</div>
   </div>
@@ -267,9 +267,9 @@
     <div class="eyebrow">Task 02 — Image Classification</div>
     <h1>Skin Cancer MNIST<br/><em>HAM10000</em></h1>
     <p class="hero-desc">
-      Bộ dữ liệu HAM10000 (Human Against Machine with 10000 training images) chứa
-      10,015 ảnh da liễu được gán nhãn bởi các chuyên gia. Đây là benchmark chuẩn
-      cho bài toán phân loại tổn thương da (skin lesion classification).
+      The HAM10000 dataset (Human Against Machine with 10,000 training images) contains
+      10,015 dermatoscopic images labeled by medical experts. It is the standard benchmark
+      for skin lesion classification in medical computer vision research.
     </p>
     <div class="hero-stats">
       <div class="hstat"><span class="hstat-val">10,015</span><span class="hstat-lbl">Total Images</span></div>
@@ -285,7 +285,7 @@
   <div class="wrap">
     <div class="section-label">01 — Dataset Overview</div>
     <h2 class="section-title">Schema & Statistics</h2>
-    <p class="section-desc">Metadata bao gồm thông tin về chẩn đoán, giới tính, vị trí tổn thương và tuổi bệnh nhân.</p>
+    <p class="section-desc">Metadata includes diagnosis type, verification method, patient sex, lesion localization, and patient age.</p>
 
     <div class="stat-grid">
       <div class="stat-card s1"><div class="stat-val">10,015</div><div class="stat-lbl">Total Records</div></div>
@@ -317,21 +317,21 @@
 <section id="diagnosis">
   <div class="wrap">
     <div class="section-label">02 — Diagnosis Classes</div>
-    <h2 class="section-title">7 Loại Tổn Thương Da</h2>
-    <p class="section-desc">HAM10000 phân loại tổn thương da thành 7 nhóm, từ lành tính đến ác tính. Mỗi nhãn được xác nhận bởi mô bệnh học, giải phẫu lâm sàng hoặc đồng thuận chuyên gia.</p>
+    <h2 class="section-title">7 Skin Lesion Types</h2>
+    <p class="section-desc">HAM10000 classifies skin lesions into 7 groups, ranging from benign to malignant. Each label is verified by histopathology, clinical follow-up, or expert consensus.</p>
 
     <div class="dx-grid">
-      <div class="dx-item"><div class="dx-dot" style="background:#5a7080"></div><span class="dx-code">NV</span><span class="dx-name">Melanocytic nevi (nốt ruồi lành tính)</span><span class="dx-count">6,705</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#6B2D2D"></div><span class="dx-code">MEL</span><span class="dx-name">Melanoma (ung thư hắc tố)</span><span class="dx-count">1,113</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#8a6050"></div><span class="dx-code">BKL</span><span class="dx-name">Benign keratosis-like lesions</span><span class="dx-count">1,099</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#a67b6b"></div><span class="dx-code">BCC</span><span class="dx-name">Basal cell carcinoma (ung thư tế bào đáy)</span><span class="dx-count">514</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#c4a882"></div><span class="dx-code">AKIEC</span><span class="dx-name">Actinic keratoses / Intraepithelial carcinoma</span><span class="dx-count">327</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#8C9BAB"></div><span class="dx-code">VASC</span><span class="dx-name">Vascular lesions (tổn thương mạch máu)</span><span class="dx-count">142</span></div>
-      <div class="dx-item"><div class="dx-dot" style="background:#5C3A2E"></div><span class="dx-code">DF</span><span class="dx-name">Dermatofibroma (u xơ bì)</span><span class="dx-count">115</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#3D5A66"></div><span class="dx-code">NV</span><span class="dx-name">Melanocytic nevi (benign moles)</span><span class="dx-count">6,705</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#4A3428"></div><span class="dx-code">MEL</span><span class="dx-name">Melanoma (malignant skin cancer)</span><span class="dx-count">1,113</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#5E7A8A"></div><span class="dx-code">BKL</span><span class="dx-name">Benign keratosis-like lesions</span><span class="dx-count">1,099</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#7A8A8A"></div><span class="dx-code">BCC</span><span class="dx-name">Basal cell carcinoma</span><span class="dx-count">514</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#8a9aaa"></div><span class="dx-code">AKIEC</span><span class="dx-name">Actinic keratoses / Intraepithelial carcinoma</span><span class="dx-count">327</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#9aacbc"></div><span class="dx-code">VASC</span><span class="dx-name">Vascular lesions</span><span class="dx-count">142</span></div>
+      <div class="dx-item"><div class="dx-dot" style="background:#1A1A1A"></div><span class="dx-code">DF</span><span class="dx-name">Dermatofibroma (benign fibrous nodule)</span><span class="dx-count">115</span></div>
     </div>
 
     <div class="card">
-      <div class="card-title">Số lượng ảnh theo loại chẩn đoán</div>
+      <div class="card-title">Image count by diagnosis class</div>
       <canvas id="dxChart"></canvas>
     </div>
   </div>
@@ -341,18 +341,18 @@
 <section id="imbalance">
   <div class="wrap">
     <div class="section-label">03 — Class Imbalance</div>
-    <h2 class="section-title">Mất Cân Bằng Nhãn Nghiêm Trọng</h2>
-    <p class="section-desc">Lớp NV (Melanocytic nevi) chiếm <strong>66.9%</strong> tổng dataset — gấp 58 lần lớp DF ít nhất. Đây là thách thức lớn nhất khi huấn luyện mô hình phân loại.</p>
+    <h2 class="section-title">Severe Class Imbalance</h2>
+    <p class="section-desc">The NV class (Melanocytic nevi) accounts for <strong>66.9%</strong> of the dataset — 58× more than the smallest class, DF. This is the primary challenge when training a classifier.</p>
 
     <div class="card" style="max-width:700px;">
-      <div class="card-title">Tỷ lệ phần trăm từng lớp</div>
-      <div class="imbalance-row"><span class="imb-label">NV</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:66.9%;background:#5a7080"></div></div><span class="imb-count">6,705</span><span class="imb-pct">66.9%</span></div>
-      <div class="imbalance-row"><span class="imb-label">MEL</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:11.1%;background:#6B2D2D"></div></div><span class="imb-count">1,113</span><span class="imb-pct">11.1%</span></div>
-      <div class="imbalance-row"><span class="imb-label">BKL</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:11.0%;background:#8a6050"></div></div><span class="imb-count">1,099</span><span class="imb-pct">11.0%</span></div>
-      <div class="imbalance-row"><span class="imb-label">BCC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:5.1%;background:#a67b6b"></div></div><span class="imb-count">514</span><span class="imb-pct">5.1%</span></div>
-      <div class="imbalance-row"><span class="imb-label">AKIEC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:3.3%;background:#c4a882"></div></div><span class="imb-count">327</span><span class="imb-pct">3.3%</span></div>
-      <div class="imbalance-row"><span class="imb-label">VASC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:1.4%;background:#8C9BAB"></div></div><span class="imb-count">142</span><span class="imb-pct">1.4%</span></div>
-      <div class="imbalance-row"><span class="imb-label">DF</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:1.1%;background:#5C3A2E"></div></div><span class="imb-count">115</span><span class="imb-pct">1.1%</span></div>
+      <div class="card-title">Percentage share per class</div>
+      <div class="imbalance-row"><span class="imb-label">NV</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:66.9%;background:#3D5A66"></div></div><span class="imb-count">6,705</span><span class="imb-pct">66.9%</span></div>
+      <div class="imbalance-row"><span class="imb-label">MEL</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:11.1%;background:#4A3428"></div></div><span class="imb-count">1,113</span><span class="imb-pct">11.1%</span></div>
+      <div class="imbalance-row"><span class="imb-label">BKL</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:11.0%;background:#5E7A8A"></div></div><span class="imb-count">1,099</span><span class="imb-pct">11.0%</span></div>
+      <div class="imbalance-row"><span class="imb-label">BCC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:5.1%;background:#7A8A8A"></div></div><span class="imb-count">514</span><span class="imb-pct">5.1%</span></div>
+      <div class="imbalance-row"><span class="imb-label">AKIEC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:3.3%;background:#8a9aaa"></div></div><span class="imb-count">327</span><span class="imb-pct">3.3%</span></div>
+      <div class="imbalance-row"><span class="imb-label">VASC</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:1.4%;background:#9aacbc"></div></div><span class="imb-count">142</span><span class="imb-pct">1.4%</span></div>
+      <div class="imbalance-row"><span class="imb-label">DF</span><div class="imb-bar-bg"><div class="imb-bar-fill" style="width:1.1%;background:#1A1A1A"></div></div><span class="imb-count">115</span><span class="imb-pct">1.1%</span></div>
     </div>
   </div>
 </section>
@@ -361,16 +361,16 @@
 <section id="demographics">
   <div class="wrap">
     <div class="section-label">04 — Patient Demographics</div>
-    <h2 class="section-title">Nhân Khẩu Học Bệnh Nhân</h2>
-    <p class="section-desc">Độ tuổi trung vị là 45, chủ yếu tập trung ở nhóm 40–60 tuổi. Nam giới chiếm phần lớn trong dataset.</p>
+    <h2 class="section-title">Patient Demographics</h2>
+    <p class="section-desc">Median patient age is 45, with concentration in the 40–60 age group. Male patients represent the majority in this dataset.</p>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Phân phối theo giới tính</div>
+        <div class="card-title">Distribution by Sex</div>
         <canvas id="sexChart"></canvas>
       </div>
       <div class="card">
-        <div class="card-title">Phân phối tuổi bệnh nhân</div>
+        <div class="card-title">Patient Age Distribution</div>
         <canvas id="ageChart"></canvas>
       </div>
     </div>
@@ -381,11 +381,11 @@
 <section id="localization">
   <div class="wrap">
     <div class="section-label">05 — Lesion Localization</div>
-    <h2 class="section-title">Vị Trí Tổn Thương</h2>
-    <p class="section-desc">Tổn thương phân bố trên 15 vị trí cơ thể. Lưng (back) và chi dưới (lower extremity) là hai vùng phổ biến nhất.</p>
+    <h2 class="section-title">Lesion Location on the Body</h2>
+    <p class="section-desc">Lesions are distributed across 15 body sites. The back and lower extremities are the two most common locations.</p>
 
     <div class="card">
-      <div class="card-title">Top 10 vị trí tổn thương trên cơ thể</div>
+      <div class="card-title">Top 10 body sites by lesion count</div>
       <canvas id="locChart" style="max-height:320px;"></canvas>
     </div>
   </div>
@@ -396,49 +396,49 @@
   <div class="wrap">
     <div class="section-label">06 — Summary</div>
     <h2 class="section-title">Key Findings</h2>
-    <p class="section-desc">Các insight chính rút ra từ quá trình EDA trên bộ dữ liệu HAM10000.</p>
+    <p class="section-desc">Core insights derived from the EDA pipeline on the HAM10000 dataset.</p>
 
     <div class="findings">
       <div class="finding">
         <div class="finding-icon">⚠️</div>
         <div class="finding-text">
-          <strong>Mất cân bằng nhãn cực kỳ nghiêm trọng</strong>
-          <span>Lớp NV chiếm 66.9% dataset — gấp 58 lần lớp DF (115 ảnh). Cần áp dụng oversampling, weighted loss hoặc augmentation để xử lý.</span>
+          <strong>Extreme Class Imbalance</strong>
+          <span>The NV class accounts for 66.9% of the dataset — 58× the size of the smallest class (DF, 115 images). Oversampling, weighted loss, or augmentation is required.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">🔬</div>
         <div class="finding-text">
-          <strong>Melanoma chỉ chiếm 11.1%</strong>
-          <span>Mặc dù là loại ung thư da nguy hiểm nhất, MEL chỉ có 1,113 mẫu. Model cần recall cao trên nhãn này để đảm bảo an toàn lâm sàng.</span>
+          <strong>Melanoma Represents Only 11.1%</strong>
+          <span>Despite being the most dangerous skin cancer, MEL has only 1,113 samples. High recall on this class is critical for clinical safety.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">👨</div>
         <div class="finding-text">
-          <strong>Nam giới chiếm ưu thế</strong>
-          <span>Dataset nghiêng về bệnh nhân nam, có thể ảnh hưởng đến khả năng tổng quát hóa của mô hình trên bệnh nhân nữ.</span>
+          <strong>Male Patient Majority</strong>
+          <span>The dataset is skewed toward male patients, which may limit generalizability for female patients without careful evaluation.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">📍</div>
         <div class="finding-text">
-          <strong>Lưng & chi dưới là vùng phổ biến nhất</strong>
-          <span>Tổn thương tập trung nhiều ở lưng và chi dưới — phù hợp với thói quen phơi nắng và sinh học da liễu.</span>
+          <strong>Back & Lower Extremity Most Common</strong>
+          <span>Lesions cluster most heavily on the back and lower extremities — consistent with sun exposure habits and dermatological biology.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">🎂</div>
         <div class="finding-text">
-          <strong>Nhóm tuổi 40–60 chiếm đa số</strong>
-          <span>Tuổi trung vị 45. Người cao tuổi có nguy cơ cao hơn với các loại tổn thương ác tính như MEL và BCC.</span>
+          <strong>Dominant Age Group: 40–60 Years</strong>
+          <span>Median patient age is 45. Older patients carry higher risk for malignant lesion types such as MEL and BCC.</span>
         </div>
       </div>
       <div class="finding">
         <div class="finding-icon">🖼️</div>
         <div class="finding-text">
-          <strong>10,015 ảnh — benchmark chuẩn quốc tế</strong>
-          <span>HAM10000 là bộ dữ liệu da liễu lớn và được sử dụng rộng rãi nhất trong cộng đồng nghiên cứu Computer Vision y tế.</span>
+          <strong>10,015 Images — International Benchmark</strong>
+          <span>HAM10000 is the largest and most widely used dermatological dataset in the medical Computer Vision research community.</span>
         </div>
       </div>
     </div>
@@ -451,8 +451,8 @@
 </footer>
 
 <script>
-const gridC = 'rgba(90,55,45,0.08)';
-const tickC = 'rgba(59,34,32,0.5)';
+const gridC = 'rgba(60,80,90,0.12)';
+const tickC = 'rgba(26,26,26,0.55)';
 
 // DIAGNOSIS BAR CHART
 new Chart(document.getElementById('dxChart'), {
@@ -462,7 +462,7 @@ new Chart(document.getElementById('dxChart'), {
     datasets: [{
       label: 'Images',
       data: [6705, 1113, 1099, 514, 327, 142, 115],
-      backgroundColor: ['#5a7080','#6B2D2D','#8a6050','#a67b6b','#c4a882','#8C9BAB','#5C3A2E'],
+      backgroundColor: ['#3D5A66','#4A3428','#5E7A8A','#7A8A8A','#8a9aaa','#9aacbc','#1A1A1A'],
       borderRadius: 6,
       borderSkipped: false
     }]
@@ -484,8 +484,8 @@ new Chart(document.getElementById('sexChart'), {
     labels: ['Male', 'Female', 'Unknown'],
     datasets: [{
       data: [5406, 4318, 291],
-      backgroundColor: ['#5a7080','#a67b6b','#E5D5BE'],
-      borderColor: '#F2EAD9',
+      backgroundColor: ['#3D5A66','#4A3428','#CDD0CE'],
+      borderColor: '#F0EFEB',
       borderWidth: 3,
       hoverOffset: 8
     }]
@@ -498,7 +498,7 @@ new Chart(document.getElementById('sexChart'), {
   }
 });
 
-// AGE HISTOGRAM (approximated as bar)
+// AGE HISTOGRAM
 new Chart(document.getElementById('ageChart'), {
   type: 'bar',
   data: {
@@ -506,8 +506,8 @@ new Chart(document.getElementById('ageChart'), {
     datasets: [{
       label: 'Patients',
       data: [48, 420, 980, 2100, 2800, 2150, 1100, 360],
-      backgroundColor: 'rgba(90,112,128,0.65)',
-      borderColor: '#5a7080',
+      backgroundColor: 'rgba(61,90,102,0.72)',
+      borderColor: '#3D5A66',
       borderWidth: 1,
       borderRadius: 4,
       borderSkipped: false
@@ -535,8 +535,8 @@ new Chart(document.getElementById('locChart'), {
     datasets: [{
       label: 'Images',
       data: [222,77,601,95,33,63,189,378,1112,243,811,54,1767,57,2307].reverse(),
-      backgroundColor: 'rgba(107,45,45,0.6)',
-      borderColor: '#6B2D2D',
+      backgroundColor: 'rgba(74,52,40,0.72)',
+      borderColor: '#4A3428',
       borderWidth: 1,
       borderRadius: 4,
       borderSkipped: false

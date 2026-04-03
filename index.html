@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
   :root {
-    --bg: #EDE0CE;
-    --surface: #E5D5BE;
-    --card: #F2EAD9;
-    --border: rgba(90,55,45,0.12);
-    --accent: #6B2D2D;
-    --accent2: #8C9BAB;
-    --accent3: #5C3A2E;
-    --accent4: #A67B6B;
-    --text: #3B2220;
-    --muted: rgba(59,34,32,0.5);
+    --bg: #E6E4DA;
+    --surface: #CDD0CE;
+    --card: #F0EFEB;
+    --border: rgba(60,80,90,0.2);
+    --accent: #3D5A66;
+    --accent2: #7A8A8A;
+    --accent3: #4A3428;
+    --accent4: #5E7A8A;
+    --text: #1A1A1A;
+    --muted: rgba(26,26,26,0.55);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +39,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--border);
-    background: rgba(237,224,206,0.96);
+    background: rgba(230,228,218,0.96);
     backdrop-filter: blur(10px);
     position: sticky; top: 0; z-index: 50;
   }
@@ -69,7 +69,7 @@
     content: '';
     position: absolute; top: -80px; right: -60px;
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(107,45,45,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(107,123,132,0.09) 0%, transparent 70%);
     pointer-events: none;
   }
   .eyebrow {
@@ -116,7 +116,7 @@
     width: 68px; height: 68px;
     border-radius: 50%;
     background: var(--surface);
-    border: 2px solid rgba(107,45,45,0.2);
+    border: 2px solid rgba(107,123,132,0.25);
     display: flex; align-items: center; justify-content: center;
     font-family: 'Cormorant Garamond', serif;
     font-size: 30px;
@@ -143,7 +143,7 @@
     border: 1px solid var(--border);
     color: var(--muted);
   }
-  .meta-tag.hi { background: rgba(107,45,45,0.08); color: var(--accent); border-color: rgba(107,45,45,0.2); }
+  .meta-tag.hi { background: rgba(107,123,132,0.1); color: var(--accent); border-color: rgba(107,123,132,0.25); }
 
   /* LAYOUT */
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 6vw; }
@@ -189,8 +189,8 @@
   }
   .task-card:not(.soon):hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 48px rgba(90,45,35,0.11);
-    border-color: rgba(107,45,45,0.28);
+    box-shadow: 0 20px 48px rgba(60,80,90,0.18);
+    border-color: rgba(61,90,102,0.45);
   }
 
   .task-thumb {
@@ -201,9 +201,9 @@
     position: relative;
     overflow: hidden;
   }
-  .task-card:nth-child(1) .task-thumb { background: linear-gradient(140deg, #6B2D2D 0%, #A67B6B 100%); }
-  .task-card:nth-child(2) .task-thumb { background: linear-gradient(140deg, #8C9BAB 0%, #5a7080 100%); }
-  .task-card:nth-child(3) .task-thumb { background: linear-gradient(140deg, #5C3A2E 0%, #8a6050 100%); }
+  .task-card:nth-child(1) .task-thumb { background: linear-gradient(140deg, #3D5A66 0%, #6B7B84 100%); }
+  .task-card:nth-child(2) .task-thumb { background: linear-gradient(140deg, #4A3428 0%, #7a5a48 100%); }
+  .task-card:nth-child(3) .task-thumb { background: linear-gradient(140deg, #1A1A1A 0%, #3a3a3a 100%); }
 
   .task-icon { font-size: 54px; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.18)); }
   .task-num {
@@ -231,8 +231,8 @@
     margin-bottom: 10px;
   }
   .task-card:nth-child(1) .task-type { color: var(--accent); }
-  .task-card:nth-child(2) .task-type { color: #5a7080; }
-  .task-card:nth-child(3) .task-type { color: var(--accent3); }
+  .task-card:nth-child(2) .task-type { color: var(--accent3); }
+  .task-card:nth-child(3) .task-type { color: var(--muted); }
 
   .task-title {
     font-family: 'Cormorant Garamond', serif;
@@ -250,8 +250,8 @@
     font-size: 22px; font-weight: 600;
   }
   .task-card:nth-child(1) .tstat-val { color: var(--accent); }
-  .task-card:nth-child(2) .tstat-val { color: #5a7080; }
-  .task-card:nth-child(3) .tstat-val { color: var(--accent3); }
+  .task-card:nth-child(2) .tstat-val { color: var(--accent3); }
+  .task-card:nth-child(3) .tstat-val { color: var(--text); }
   .tstat-lbl {
     font-size: 9px; color: var(--muted);
     letter-spacing: 0.08em; text-transform: uppercase;
@@ -267,19 +267,19 @@
   }
   .task-card:nth-child(1) .task-cta {
     color: var(--accent);
-    border: 1px solid rgba(107,45,45,0.25);
-    background: rgba(107,45,45,0.05);
+    border: 1px solid rgba(61,90,102,0.35);
+    background: rgba(61,90,102,0.09);
   }
-  .task-card:nth-child(1) .task-cta:hover { background: rgba(107,45,45,0.12); border-color: rgba(107,45,45,0.4); }
+  .task-card:nth-child(1) .task-cta:hover { background: rgba(61,90,102,0.18); border-color: rgba(61,90,102,0.5); }
   .task-card:nth-child(2) .task-cta {
-    color: #5a7080;
-    border: 1px solid rgba(90,112,128,0.25);
-    background: rgba(90,112,128,0.05);
+    color: var(--accent3);
+    border: 1px solid rgba(74,52,40,0.35);
+    background: rgba(74,52,40,0.09);
   }
   .task-card:nth-child(3) .task-cta {
-    color: var(--accent3);
-    border: 1px solid rgba(92,58,46,0.25);
-    background: rgba(92,58,46,0.05);
+    color: var(--text);
+    border: 1px solid rgba(26,26,26,0.25);
+    background: rgba(26,26,26,0.06);
   }
 
   .task-cta svg { transition: transform .18s; }
@@ -294,7 +294,7 @@
   .soon-overlay {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(237,224,206,0.35);
+    background: rgba(230,228,218,0.35);
     backdrop-filter: blur(2px);
     z-index: 5;
   }
@@ -338,8 +338,8 @@
     <div class="eyebrow">Exploratory Data Analysis</div>
     <h1>Machine Learning<br/><em>Final Project</em></h1>
     <p class="hero-sub">
-      Báo cáo phân tích dữ liệu khám phá cho 3 bài toán học máy:
-      Phân loại văn bản, Phân loại ảnh, và Dự đoán dữ liệu bảng.
+      Exploratory data analysis reports for 3 machine learning tasks:
+      Text Classification, Image Classification, and Tabular Data Prediction.
     </p>
 
     <div class="student-card">
@@ -347,10 +347,10 @@
       <div class="student-info">
         <div class="student-name">Nguyễn Văn A</div>
         <div class="student-meta">
-          <span class="meta-tag hi">MSSV: 12345678</span>
-          <span class="meta-tag">Lớp: CNTT01</span>
-          <span class="meta-tag">Môn: Machine Learning</span>
-          <span class="meta-tag">GV: Nguyễn Thị B</span>
+          <span class="meta-tag hi">Student ID: 12345678</span>
+          <span class="meta-tag">Class: CNTT01</span>
+          <span class="meta-tag">Subject: Machine Learning</span>
+          <span class="meta-tag">Lecturer: Nguyễn Thị B</span>
           <span class="meta-tag">UIT — 2025–2026</span>
         </div>
       </div>
@@ -361,11 +361,11 @@
 <!-- TASKS -->
 <section>
   <div class="wrap">
-    <div class="section-label">Nội dung báo cáo</div>
+    <div class="section-label">Report Contents</div>
     <h2 class="section-title">3 Tasks — 3 Datasets</h2>
     <p class="section-desc">
-      Mỗi task tương ứng một loại dữ liệu và phương pháp phân tích riêng.
-      Nhấn vào card để xem báo cáo EDA chi tiết.
+      Each task corresponds to a distinct data type and analysis methodology.
+      Click a card to view the detailed EDA report.
     </p>
 
     <div class="tasks-grid">
@@ -381,8 +381,8 @@
           <div class="task-type">Text Classification</div>
           <div class="task-title">Women's Clothing Reviews</div>
           <div class="task-desc">
-            Phân tích tập đánh giá sản phẩm thời trang phụ nữ từ nền tảng e-commerce.
-            Khám phá phân phối rating, từ vựng và đặc trưng văn bản.
+            Analysis of women's fashion product reviews from an e-commerce platform.
+            Exploring rating distributions, vocabulary patterns, and text features.
           </div>
           <div class="task-stats">
             <div class="tstat"><span class="tstat-val">23,486</span><span class="tstat-lbl">Reviews</span></div>
@@ -390,7 +390,7 @@
             <div class="tstat"><span class="tstat-val">4.20★</span><span class="tstat-lbl">Avg Rating</span></div>
           </div>
           <span class="task-cta">
-            Xem báo cáo
+            View Report
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
@@ -407,8 +407,8 @@
           <div class="task-type">Image Classification</div>
           <div class="task-title">Skin Cancer MNIST: HAM10000</div>
           <div class="task-desc">
-            Phân tích bộ dữ liệu ảnh da liễu gồm 10,015 hình ảnh tổn thương da
-            được phân thành 7 nhóm chẩn đoán. Khám phá mất cân bằng nhãn và phân phối nhân khẩu học.
+            Analysis of a dermatological image dataset with 10,015 skin lesion images
+            classified into 7 diagnostic groups. Exploring label imbalance and demographic distributions.
           </div>
           <div class="task-stats">
             <div class="tstat"><span class="tstat-val">10,015</span><span class="tstat-lbl">Images</span></div>
@@ -416,7 +416,7 @@
             <div class="tstat"><span class="tstat-val">66.9%</span><span class="tstat-lbl">Top Class</span></div>
           </div>
           <span class="task-cta">
-            Xem báo cáo
+            View Report
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
@@ -434,15 +434,15 @@
           <div class="task-type">Tabular Prediction</div>
           <div class="task-title">Tabular Dataset</div>
           <div class="task-desc">
-            Phân tích tập dữ liệu bảng cho bài toán phân loại hoặc hồi quy.
-            Khám phá phân phối đặc trưng, tương quan và giá trị thiếu.
+            Analysis of a tabular dataset for classification or regression tasks.
+            Exploring feature distributions, correlations, and missing values.
           </div>
           <div class="task-stats">
             <div class="tstat"><span class="tstat-val">—</span><span class="tstat-lbl">Rows</span></div>
             <div class="tstat"><span class="tstat-val">—</span><span class="tstat-lbl">Features</span></div>
           </div>
           <span class="task-cta">
-            Xem báo cáo
+            View Report
             <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </span>
         </div>
