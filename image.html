@@ -553,5 +553,26 @@ new Chart(document.getElementById('locChart'), {
   }
 });
 </script>
+<section class="model-results">
+  <div class="section-header">
+    <h2>Voting Ensemble Evaluation</h2>
+    <p>Confusion Matrix for Image Classification</p>
+  </div>
+  <div class="chart-container">
+    <div id="cm-7"></div>
+  </div>
+</section>
+
+<script>
+  const cmData7 = {
+    data: [
+      /* Extract and paste the 'data' array from the Plotly JSON output in p4aids-image (1).ipynb */
+    ],
+    layout: {
+      /* Extract and paste the 'layout' object from the Plotly JSON output in p4aids-image (1).ipynb */
+    }
+  };
+  Plotly.newPlot('cm-7', cmData7.data, cmData7.layout);
+</script>
 </body>
 </html>

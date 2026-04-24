@@ -732,5 +732,26 @@ new Chart(document.getElementById('premiumChart'), {
   }
 });
 </script>
+<section class="model-results">
+  <div class="section-header">
+    <h2>Voting Ensemble Evaluation</h2>
+    <p>Actual vs Predicted Price Prediction</p>
+  </div>
+  <div class="chart-container">
+    <div id="scatter-7"></div>
+  </div>
+</section>
+
+<script>
+  const scatterData7 = {
+    data: [
+      /* Extract and paste the 'data' array from the Plotly JSON output in p4aids-tabular (1).ipynb */
+    ],
+    layout: {
+      /* Extract and paste the 'layout' object from the Plotly JSON output in p4aids-tabular (1).ipynb */
+    }
+  };
+  Plotly.newPlot('scatter-7', scatterData7.data, scatterData7.layout);
+</script>
 </body>
 </html>

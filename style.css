@@ -1,0 +1,22 @@
+.model-results {
+  padding: 40px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
