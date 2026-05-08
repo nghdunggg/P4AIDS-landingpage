@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Task 3 — Tabular EDA · Bodybuilding Nutrition Products</title>
+<title>Task 3 — Tabular EDA & Modeling · Bodybuilding Nutrition Products</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
 <style>
   :root {
     --bg: #E6E4DA;
@@ -271,6 +272,7 @@
     <a href="#correlation">Correlation</a>
     <a href="#target">Target</a>
     <a href="#findings">Findings</a>
+    <a href="#modeling" style="color:var(--accent);">Modeling</a>
   </div>
 </nav>
 
@@ -624,8 +626,93 @@
   </div>
 </section>
 
+<section id="modeling">
+  <div class="wrap">
+    <div class="section-label">10 — Modeling Results</div>
+    <h2 class="section-title">Regression Models Performance</h2>
+    <p class="section-desc">Pipeline training để dự đoán giá sản phẩm (Target: Price) kết hợp các bước KNN Imputation, Log Transform, Standardization và One-Hot Encoding. Ridge Regression và Voting Ensemble cho kết quả tốt nhất.</p>
+    
+    <div class="tbl-wrap" style="margin-bottom:28px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>R² Score (Higher = Better)</th>
+            <th>RMSE (Lower = Better)</th>
+            <th>MAE (Lower = Better)</th>
+            <th>Train Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Linear Regression</strong></td>
+            <td>0.0719</td>
+            <td>17.1534</td>
+            <td>12.1991</td>
+            <td>0.16s</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent);">Ridge Regression (Best R²)</strong></td>
+            <td><strong style="color:var(--accent);">0.2921</strong></td>
+            <td><strong style="color:var(--accent);">14.9812</strong></td>
+            <td>10.7302</td>
+            <td>0.11s</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--accent2);">SVR (Best MAE)</strong></td>
+            <td>0.2451</td>
+            <td>15.4709</td>
+            <td><strong style="color:var(--accent2);">9.9887</strong></td>
+            <td>0.14s</td>
+          </tr>
+          <tr>
+            <td><strong>Random Forest</strong></td>
+            <td>0.2734</td>
+            <td>15.1781</td>
+            <td>10.8983</td>
+            <td>0.45s</td>
+          </tr>
+          <tr>
+            <td><strong>Gradient Boosting</strong></td>
+            <td>0.2483</td>
+            <td>15.4382</td>
+            <td>10.9982</td>
+            <td>0.31s</td>
+          </tr>
+          <tr>
+            <td><strong>MLP Regressor</strong></td>
+            <td>-0.0623</td>
+            <td>18.3517</td>
+            <td>14.1909</td>
+            <td>4.10s</td>
+          </tr>
+          <tr>
+            <td><strong>XGBoost</strong></td>
+            <td>0.2147</td>
+            <td>15.7794</td>
+            <td>11.1754</td>
+            <td>0.25s</td>
+          </tr>
+          <tr style="background-color: rgba(61,90,102,0.05);">
+            <td><strong>Voting Ensemble (RF + GB + XGB)</strong></td>
+            <td><strong>0.2850</strong></td>
+            <td><strong>15.0559</strong></td>
+            <td><strong>10.7035</strong></td>
+            <td>1.27s</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <div class="card-title">Voting Ensemble Evaluation (Actual vs Predicted)</div>
+      <div id="scatter-7" style="height:450px; width:100%;"></div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <span>Task 03 — Tabular EDA · Bodybuilding Nutrition Products</span>
+  <span>Task 03 — Tabular EDA & Modeling · Bodybuilding Nutrition Products</span>
   <span>Dataset: <code>bodybuilding_nutrition_products.csv</code> · 840 records · 14 features</span>
 </footer>
 
@@ -732,26 +819,27 @@ new Chart(document.getElementById('premiumChart'), {
   }
 });
 </script>
-<section class="model-results">
-  <div class="section-header">
-    <h2>Voting Ensemble Evaluation</h2>
-    <p>Actual vs Predicted Price Prediction</p>
-  </div>
-  <div class="chart-container">
-    <div id="scatter-7"></div>
-  </div>
-</section>
 
 <script>
+  // Placeholder Plotly JSON data for Actual vs Predicted
+  // Đảm bảo bạn dán mảng "data" và object "layout" của biểu đồ Scatter "Voting Ensemble" vào đây.
   const scatterData7 = {
     data: [
-      /* Extract and paste the 'data' array from the Plotly JSON output in p4aids-tabular (1).ipynb */
+      /* Paste 'data' từ output file JSON tại đây */
     ],
     layout: {
-      /* Extract and paste the 'layout' object from the Plotly JSON output in p4aids-tabular (1).ipynb */
+      title: { text: "Actual vs Predicted Price - Voting Ensemble" },
+      xaxis: { title: { text: "Actual Price" } },
+      yaxis: { title: { text: "Predicted Price" } },
+      plot_bgcolor: "transparent",
+      paper_bgcolor: "transparent",
+      autosize: true
     }
   };
-  Plotly.newPlot('scatter-7', scatterData7.data, scatterData7.layout);
+  
+  if (scatterData7.data && scatterData7.data.length > 0) {
+      Plotly.newPlot('scatter-7', scatterData7.data, scatterData7.layout, {responsive: true});
+  }
 </script>
 </body>
 </html>
